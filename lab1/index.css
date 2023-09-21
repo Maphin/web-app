@@ -1,0 +1,53 @@
+header {
+    color: red;
+    height: auto;
+    width: 100%;
+    border: 1px solid red;
+    text-align: center;
+}
+.header {
+    color: black;
+}
+main {
+    margin-top: 10px;
+    height: auto;
+    border: 1px solid red;
+}
+main div {
+    color: red;
+    width: 100%;
+    text-align: center;
+}
+footer div {
+    margin-top: 10px;
+    color: red;
+    height: auto;
+    width: 100%;
+    border: 1px solid red;
+    text-align: center;
+}
+img {
+    display: block;
+    margin: 0 auto;
+}
+a {
+    display: block;
+    margin: 10px 0 0 10px;
+    text-decoration: none;
+    font-size: 24px;
+}
+ol {
+    display: block;
+    margin-top: 10px;
+    font-size: 24px;
+}
+.test {
+    font-size: 24px;
+    margin: 10px 0 0 10px;
+}
+form {
+    margin: 20px 0 0 10px;
+}
+iframe {
+    margin: 10px 0 0 10px;
+}
