@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600&display=swap");
+@import 'blocks/header';
+@import 'blocks/media';
+@import 'blocks/slider';
+@import 'blocks/home';
+@import 'blocks/btn';
+@import 'blocks/about';
+@import 'blocks/features';
+@import 'base/mixins';
+@import 'blocks/footer';
+@import 'blocks/forms';
+@import 'blocks/pulse';
+
+* {
+    font-family: 'Nutino', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-transform: capitalize;
+    text-decoration: none;
+    transition: all .2s linear;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    background: #000;
+}
+   
+
+section {
+    padding: 5rem 9%;
+}

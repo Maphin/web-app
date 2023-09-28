@@ -1,0 +1,24 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.2% 9%;
+    z-index: 10000;
+    &__logo {
+        font-weight: bolder;
+        color: #fff;
+        font-size: 2.5rem;
+        span {
+            color: #ff0000;
+        }
+    }
+    &__navbar a {
+        display: inline-block;
+        padding: 1.5rem 2rem;
+        font-size: 1.7rem;
+        color: #fff;
+        &:hover {
+            background-color: #ff0000;
+        }
+    }
+}   

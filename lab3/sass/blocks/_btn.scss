@@ -1,0 +1,15 @@
+.btn {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    padding-right: 3rem;
+    background: linear-gradient(130deg, #ff0000 93%, transparent 90%);
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.7rem;
+    font-weight: 500;
+    &:hover {
+        transform: scale(1.1);
+        font-weight: 700;
+    }
+}

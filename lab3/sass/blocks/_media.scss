@@ -1,0 +1,59 @@
+@media (max-width: 991px) {
+    html {
+        font-size: 55%;
+    }
+    .header {
+        padding: 0 2rem;
+    }
+    section {
+        padding: 3rem 2rem;
+    }
+    .home {
+        padding: 2rem 5%;
+        .slide {
+            &__content {
+                width: 50rem;
+                h3 {
+                    font-size: 4rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    html {
+        font-size: 55%;
+    }
+    .header {
+        padding: 2rem;
+        &__navbar {
+            position: absolute;
+            top: 20%;
+            left: 0;
+            right: 0;
+            background-color: #000;
+            a {
+                display: block;
+                font-size: 2rem;
+            }
+        }
+    }
+    .about {
+        gap: 3rem;
+        .image {
+            margin-top: 5rem;
+        }
+        &__content {
+            &__title {
+                font-size: 3rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 55%;
+    }
+}

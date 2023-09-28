@@ -1,0 +1,39 @@
+.pulse{
+    height: 4.5rem;
+    width: 4.5rem;
+    background: linear-gradient(
+        #8a82fb,
+        #407ed7
+    );
+    position: absolute;
+    left: 74%;
+    margin: 1.2rem auto;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 1.7rem;
+    color: #ffffff;
+}
+.pulse:before,
+.pulse:after{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #8a82fb;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.7;
+}
+.pulse:before{
+    animation: pulse 2s ease-out infinite;
+}
+.pulse:after{
+    animation: pulse 2s 1s ease-out infinite;
+}
+@keyframes pulse{
+    100%{
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
