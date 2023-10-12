@@ -1,0 +1,104 @@
+@media (max-width: 991px) {
+    html {
+        font-size: 55%;
+    }
+    .header {
+        padding: 0 2rem;
+    }
+    section {
+        padding: 3rem 2rem;
+    }
+    .home {
+        padding: 2rem 5%;
+        .slide {
+            &__content {
+                width: 50rem;
+                h3 {
+                    font-size: 4rem;
+                }
+            }
+        }
+    }
+    .login {
+        height: 42rem;
+        width: 36rem;
+        &__form {
+            h2 {
+                
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    html {
+        font-size: 55%;
+    }
+    .header {
+        padding: 2rem;
+        &__navbar {
+            position: absolute;
+            top: 20%;
+            left: 0;
+            right: 0;
+            background-color: #000;
+            a {
+                display: block;
+                font-size: 2rem;
+            }
+        }
+    }
+    .about {
+        gap: 3rem;
+        .image {
+            margin-top: 5rem;
+        }
+        &__content {
+            &__title {
+                font-size: 3rem;
+            }
+        }
+    }
+    .user-table {
+        font-size: 1rem;
+        &__cell {
+            font-size: 1rem;
+            --avatar, --actions {
+                display: none;
+            }
+            --hidden {
+                display: table-cell;
+            }
+        }
+    }
+    
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 55%;
+    }
+    .register {
+        &__form {
+            .column {
+                flex-wrap: wrap;
+            }
+            :where(.gender-option, .gender) {
+                row-gap: 15px;
+            }
+        }
+    }
+    .user-table {
+        font-size: .8rem;
+        &__header {
+            font-size: 1rem;
+        }
+        &__cell {
+            font-size: .8rem;
+        }
+        .action-button {
+            width: 4rem;
+            font-size: .8rem;
+        }
+    }
+}

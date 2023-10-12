@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="sass/style.css">
+    <title>Gym App Register</title>
+</head>
+<body class="auth-page auth-page__register">
+    <section class="container">
+        <header>Registration Form</header>
+        <form action="#" class="register__form">
+            <div class="column">
+                <div class="register__form__box">
+                    <span class="icon">
+                        <i class="fa-solid fa-user-pen"></i>
+                    </span>
+                    <input type="text" required />
+                    <label>First Name</label>
+                  </div>
+                  <div class="register__form__box">
+                    <span class="icon">
+                        <i class="fa-solid fa-user-pen"></i>
+                    </span>
+                    <input type="text" required />
+                    <label>Middle Name</label>
+                  </div>
+                  <div class="register__form__box">
+                    <span class="icon">
+                        <i class="fa-solid fa-user-pen"></i>
+                    </span>
+                    <input type="text" required />
+                    <label>Last Name</label>
+                  </div>
+            </div>
+            <div class="column">
+                <div class="register__form__box">
+                    <span class="icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </span>
+                    <input type="text" required />
+                    <label>Email Address</label>
+                </div>
+                <div class="register__form__box">
+                    <span class="icon">
+                        <i class="fa-solid fa-lock"></i>
+                    </span>
+                    <input type="password" required />
+                    <label>Password</label>
+                </div>
+            </div>
+            <div class="register__form__box">
+                <span class="icon">
+                    <i class="fa-regular fa-calendar"></i>
+                </span>
+                <input type="date" class="birth" required />
+                <label class="birth">Birth Date</label>
+            </div>
+          <div class="register__form__gender-box">
+            <span class="icon">
+                <i class="fa-solid fa-venus-mars"></i>
+            </span>
+            <label>Gender</label>
+            <div class="gender-option">
+              <div class="gender">
+                <input type="radio" id="check-male" name="gender" checked />
+                <label for="check-male">Male</label>
+              </div>
+              <div class="gender">
+                <input type="radio" id="check-female" name="gender" />
+                <label for="check-female">Female</label>
+              </div>
+              <div class="gender">
+                <input type="radio" id="check-other" name="gender" />
+                <label for="check-other">Prefer not to say</label>
+              </div>
+            </div>
+          </div>
+          <div class="register__form__box">
+            <input type="file" required />
+            <label class="file"></label>
+          </div>
+          <button class="btn__login">Submit</button>
+        </form>
+      </section>
+</body>
+</html>
