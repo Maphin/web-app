@@ -4,8 +4,12 @@ let perimeter = document.querySelector("#perimeter");
 let area = document.querySelector("#area");
 let diagonal = document.querySelector("#diagonal_length");
 
+const validation = () => {
+    return Number(length.value) > 0 && Number(width.value) > 0;
+}
+
 const calculatePerimeter = () => {
-    if (Number(length.value) && Number(width.value)) {
+    if (validation()) {
         let result = (Number(length.value) + Number(width.value)) * 2;
         perimeter.textContent = result;
     } else {
@@ -14,7 +18,7 @@ const calculatePerimeter = () => {
 }
 
 const calculateArea = () => {
-    if (Number(length.value) && Number(width.value)) {
+    if (validation()) {
         let result = Number(length.value) * Number(width.value);
         area.textContent = result;
     } else {
@@ -24,7 +28,7 @@ const calculateArea = () => {
 }
 
 const calculateDiagonal = () => {
-    if (Number(length.value) && Number(width.value)) {
+    if (validation()) {
         let result = Math.sqrt((Number(length.value) ** 2) + (Number(width.value) ** 2));
         diagonal.textContent = result; 
     } else {

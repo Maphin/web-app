@@ -5,6 +5,10 @@ const getDayOfBirth = () => {
     const date = document.querySelector("#date").value.split('-').map(v => Number(v));
     const [year, month, day] = [...date];
 
+    if (year < 1583) {
+        return "Year must be equal or over 1583";
+    }
+
     const a = Math.floor((14 - month) / 12);
     const y = year - a;
     const m = month + 12 * a - 2;
