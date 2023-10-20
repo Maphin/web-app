@@ -1,0 +1,20 @@
+.faq {
+    max-width: 1200px;
+    margin: 0 auto;
+    &__item {
+        font-size: 2.2rem;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        padding-top: 30px;
+        .answer {
+            max-width: 600px;
+
+        }
+        .question {
+            max-width: 600px;
+        }
+    }
+}

@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600&display=swap");
+@import 'blocks/header';
+@import 'blocks/slider';
+@import 'blocks/home';
+@import 'blocks/btn';
+@import 'blocks/about';
+@import 'blocks/features';
+@import 'base/mixins';
+@import 'blocks/footer';
+@import 'blocks/forms';
+@import 'blocks/pulse';
+@import 'blocks/login';
+@import 'blocks/register';
+@import 'blocks/table';
+@import 'blocks/faq';
+@import 'blocks/contact';
+@import 'blocks/media';
+
+* {
+    font-family: 'Nutino', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    transition: all .2s linear;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body.main-page {
+    background: #000;
+    text-transform: capitalize;
+}
+
+body.auth-page {
+    background: url('https://static.vecteezy.com/system/resources/previews/002/884/043/original/abstract-red-and-black-futuristic-gaming-background-in-livestream-free-vector.jpg');
+    background-position-y: 4%;
+    background-size: cover;
+    text-transform: none;
+    &__register {
+        min-height: 100vh;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+}
+
+body.table {
+    background: url('https://static.vecteezy.com/system/resources/previews/002/884/043/original/abstract-red-and-black-futuristic-gaming-background-in-livestream-free-vector.jpg');
+    background-position-y: 4%;
+    background-size: cover;
+    text-transform: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+section {
+    padding: 5rem 9%;
+}
