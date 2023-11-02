@@ -1,5 +1,5 @@
 <template>
-    <div class="register-page">
+    <div class="auth-page">
         <section class="container">
             <header>Registration Form</header>
             <form action="" @submit.prevent="onSubmit"
@@ -102,6 +102,7 @@
     import { vMaska } from "maska";
     import ErrorMessage from '../common/Error/Error.vue';
     import UsersTable from '../UsersTable/UsersTable.vue';
+    import { nameInputsValidation, emailValidation, passwordValidation, birthValidation } from '../common/validations/validations';
 
     export default defineComponent({
         name: 'RegisterForm',
@@ -129,7 +130,6 @@
                     password: '',
                     birth: '',
                 },
-                //isSubmitted: false,
             }
         },
         computed: {
@@ -144,49 +144,10 @@
             clearErrors(fieldName) {
                 this.errors[fieldName] = '';
             },
-            nameInputsValidation(inputValue, fieldName) {
-                let error = '';
-                if (/\d/.test(inputValue) || inputValue.length < 3) {
-                    error = `${fieldName} must be at least 3 characters and contain only alphabet letters`;
-                }
-                return error;
-            },
-            emailValidation() {
-                let error = '';
-                const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-                if (!emailRegex.test(this.user.email)) {
-                    error = "Invalid email format";
-                }
-                return error;
-            },
-            passwordValidation() {
-                let error = '';
-                if (this.user.password.length < 8) {
-                    error = "Password must be 8 characters at least";
-                } else if (this.user.password.length > 20) {
-                    error = "Password is too long";
-                }
-                return error;
-            },
-            birthValidation() {
-                let error = '';
-                const date = this.user.dateOfBirth.split('-').map(v => Number(v));
-                const year = date[0];
-
-                if (year < 1910) {
-                    error = "You couldn't be born earlier than 1910";
-                }
-                return error;
-            },
-
             onSubmit() {
                 if (!this.hasErrors) {
                     const data = this.user;
-                    console.log(data);
-                    console.log('this.user', this.users);
-
                     this.users.push(data);
-                    //this.isSubmitted = !this.isSubmitted;
                     this.user = {
                         firstName: '',
                         midName: '',
@@ -203,28 +164,40 @@
         },
         watch: {
             'user.firstName': function (newVal) {
+                if (newVal) {
                     this.clearErrors('firstName');
-                    this.errors.firstName = this.nameInputsValidation(newVal, 'First name');
+                    this.errors.firstName = nameInputsValidation(newVal, 'First name');
+                }
             },
             'user.midName': function (newVal) {
+                if (newVal) {
                     this.clearErrors('midName');
-                    this.errors.midName = this.nameInputsValidation(newVal, 'Middle name');
+                    this.errors.midName = nameInputsValidation(newVal, 'Middle name');
+                }
             },
             'user.lastName': function (newVal) {
+                if (newVal) {
                     this.clearErrors('lastName');
-                    this.errors.lastName = this.nameInputsValidation(newVal, 'Last name');
+                    this.errors.lastName = nameInputsValidation(newVal, 'Last name');
+                }
             },
             'user.email': function (newVal) {
+                if (newVal) {
                     this.clearErrors('email');
-                    this.errors.email = this.emailValidation(newVal);
+                    this.errors.email = emailValidation(newVal, this.user.email);
+                }
             },
             'user.password': function (newVal) {
+                if (newVal) {
                     this.clearErrors('password');
-                    this.errors.password = this.passwordValidation(newVal);
+                    this.errors.password = passwordValidation(newVal, this.user.password);
+                }
             },
             'user.dateOfBirth': function (newVal) {
+                if (newVal) {
                     this.clearErrors('birth');
-                    this.errors.dateOfBirth = this.birthValidation(newVal);
+                    this.errors.dateOfBirth = birthValidation(newVal, this.user.dateOfBirth);
+                }
             },
         },
         
@@ -232,18 +205,6 @@
 </script>
 
 <style lang="scss" scoped>
-.register-page {
-    background: url('https://static.vecteezy.com/system/resources/previews/002/884/043/original/abstract-red-and-black-futuristic-gaming-background-in-livestream-free-vector.jpg');
-    background-position-y: 4%;
-    background-size: cover;
-    text-transform: none;
-    min-height: 100vh;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-}
 .container {
     position: relative;
     max-width: 70rem;
@@ -347,77 +308,5 @@
             cursor: pointer;
         }
     }
-}
-#userTable {
-    width: 90%;
-    margin-top: 5rem;
-    border-collapse: collapse;
-    display: none;
-}
-
-.action-btn{
-    margin-top: 1rem;
-    background-color: #ff0000;
-    width: 60%;
-    height: 3rem;
-    outline: none;
-    border: none;
-    border-radius: .4rem;
-    font-size: 2rem;
-    box-shadow: rgba(0, 0, 0, 0.4);
-    cursor: pointer;
-    color: #fff;
-}
-
-.register-actions {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    display: none;
-    width: 50%;
-}
-
-#userTable th {
-    background-color: #FFEBCD;
-    text-align: left;
-}
-
-#userTable th, #userTable td {
-    border: 1px solid #ccc;
-    padding: 8px;
-}
-
-#userTable tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-#userTable tbody tr:nth-child(odd) {
-    background-color: gray;
-}
-
-#userTable tbody tr:hover {
-    background-color: #e0e0e0;
-}
-
-.errorMessage {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 1rem;
-    color: red;
-    font-size: 1.4rem;
-}
-
-.btn__login {
-    background-color: #ff0000;
-    width: 100%;
-    height: 4.5rem;
-    outline: none;
-    border: none;
-    border-radius: .4rem;
-    font-size: 1.6rem;
-    box-shadow: rgba(0, 0, 0, 0.4);
-    cursor: pointer;
-    color: #fff;
 }
 </style>

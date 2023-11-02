@@ -16,7 +16,10 @@
     "core-js": "^3.8.3",
     "font-awesome": "^4.7.0",
     "maska": "^2.1.10",
-    "vue": "^3.2.13"
+    "swiper": "^11.0.3",
+    "vue": "^3.2.13",
+    "vue-router": "^4.2.5",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

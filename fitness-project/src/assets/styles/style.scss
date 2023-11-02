@@ -1,0 +1,41 @@
+@import 'base/mixins';
+
+.btn {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    padding-right: 3rem;
+    background: linear-gradient(130deg, #ff0000 93%, transparent 90%);
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.7rem;
+    font-weight: 500;
+    &:hover {
+        transform: scale(1.1);
+        font-weight: 700;
+    }
+}
+.btn__login {
+    background-color: #ff0000;
+    width: 100%;
+    height: 4.5rem;
+    outline: none;
+    border: none;
+    border-radius: .4rem;
+    font-size: 1.6rem;
+    box-shadow: rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    color: #fff;
+}
+.auth-page {
+    background: url('https://static.vecteezy.com/system/resources/previews/002/884/043/original/abstract-red-and-black-futuristic-gaming-background-in-livestream-free-vector.jpg');
+    background-position-y: 4%;
+    background-size: cover;
+    text-transform: none;
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
