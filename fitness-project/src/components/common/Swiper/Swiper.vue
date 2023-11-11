@@ -1,43 +1,45 @@
 <template>
-    <swiper-container
-        :slides-per-view="1"
-        :space-between="20"
-        :effect="fade"
-        :grabCursor="true"
-        :centered-slides="true"
-        :pagination="{
-            hideOnClick: true
-        }"
-        :loop="true"
-    >
-        <swiper-slide>
-            <div class="swiper-slide slide">
-                <div class="slide__content">
-                    <span>be strong, be fit</span>
-                    <h3>Make yourself stronger than your excuses.</h3>
-                    <a href="#" class="btn">get started</a>
+    <div class="swiper" id="swiper">
+        <swiper-container
+            :slides-per-view="1"
+            :space-between="20"
+            :effect="fade"
+            :grabCursor="true"
+            :centered-slides="true"
+            :pagination="{
+                hideOnClick: true
+            }"
+            :loop="true"
+        >
+            <swiper-slide>
+                <div class="swiper-slide slide">
+                    <div class="slide__content">
+                        <span>be strong, be fit</span>
+                        <h3>Make yourself stronger than your excuses.</h3>
+                        <a href="#" class="btn">get started</a>
+                    </div>
                 </div>
-            </div>
-        </swiper-slide>
-        <swiper-slide>
-            <div class="swiper-slide slide slide2">
-                <div class="slide__content">
-                    <span>be strong, be fit</span>
-                    <h3>Make yourself stronger than your excuses.</h3>
-                    <a href="#" class="btn">get started</a>
+            </swiper-slide>
+            <swiper-slide>
+                <div class="swiper-slide slide slide2">
+                    <div class="slide__content">
+                        <span>be strong, be fit</span>
+                        <h3>Make yourself stronger than your excuses.</h3>
+                        <a href="#" class="btn">get started</a>
+                    </div>
                 </div>
-            </div>
-        </swiper-slide>
-        <swiper-slide>
-            <div class="swiper-slide slide slide3">
-                <div class="slide__content">
-                    <span>be strong, be fit</span>
-                    <h3>Make yourself stronger than your excuses.</h3>
-                    <a href="#" class="btn">get started</a>
+            </swiper-slide>
+            <swiper-slide>
+                <div class="swiper-slide slide slide3">
+                    <div class="slide__content">
+                        <span>be strong, be fit</span>
+                        <h3>Make yourself stronger than your excuses.</h3>
+                        <a href="#" class="btn">get started</a>
+                    </div>
                 </div>
-            </div>
-        </swiper-slide>
-    </swiper-container>
+            </swiper-slide>
+        </swiper-container>
+    </div>
 </template>
 
 <script>
@@ -52,6 +54,10 @@
 </script>
 
 <style lang="scss" scoped>
+    .swiper {
+        padding: 0;
+        margin-top: 1.5rem;
+    }
     .slide {
         background: url('https://wallpapercave.com/wp/wp8997383.jpg') center (center/cover) no-repeat;
         min-height: 70vh;
