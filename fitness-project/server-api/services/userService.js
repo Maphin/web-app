@@ -3,8 +3,10 @@ import bcrypt from 'bcrypt';
 import config from '../config.js';
 import { pool } from '../utils/db.js';
 import { dbQueries } from '../utils/dbQueries.js';
+import { promisify } from 'util';
 
 const userService = {};
+const poolQuery = promisify(pool.query).bind(pool);
 
 const getJwtToken = (user) => {
     return jwt.sign(
@@ -19,9 +21,8 @@ const getJwtToken = (user) => {
     )
 };
 
-userService.register = async function(body) {
+userService.register = async function (body) {
     try {
-        console.log(body);
         const password = body.password;
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
@@ -37,22 +38,62 @@ userService.register = async function(body) {
             isCoach: body.isCoach
         };
 
-        pool.query(dbQueries.registerCustomer(), [doc.firstName, doc.lastName, doc.email, doc.passwordHash, doc.description, doc.birthDate, doc.phone, doc.isCoach], function(err, rows, fields) {
-            if (err) {
-                console.log(err);
-            } else {
-                pool.query(dbQueries.getAllCustomers(), function(err, rows, fields) {
-                    console.log(rows);
-                })
-            }
-        });
+        const rows = await poolQuery(dbQueries.findCustomerByEmail(), [doc.email]);
+        let error = false;
 
-        const token = getJwtToken(user);
-        const {passwordHash, ...userData} = doc;
+        if (rows.length > 0) {
+            error = true;
+            return { error };
+        } else {
+            await poolQuery(dbQueries.registerCustomer(), [
+                doc.firstName,
+                doc.lastName,
+                doc.email,
+                doc.passwordHash,
+                doc.description,
+                doc.birthDate,
+                doc.phone,
+                doc.isCoach
+            ]);
+        }
 
-        return {userData, token};
+        // const customers = await poolQuery(dbQueries.getAllCustomers());
+        // console.log(customers);
+
+        const token = getJwtToken(doc);
+        const { passwordHash, ...userData } = doc;
+
+        return { error, userData, token };
     } catch (err) {
         throw Error('Error while registering User: ' + err);
+    }
+}
+
+userService.login = async function (body) {
+    try {
+        let error = false;
+
+        const rows = await poolQuery(dbQueries.findCustomerByEmail(), [body.email]);
+        console.log(rows);
+
+        if (rows.length === 0) {
+            error = true;
+            return { error };
+        }
+
+        const isValidPass = bcrypt.compareSync(body.password, rows[0].passwordHash);
+
+        if (!isValidPass) {
+            error = true;
+            return { error };
+        }
+
+        const token = getJwtToken(rows[0]);
+        const { passwordHash, ...userData } = rows[0];
+        return { error, userData, token };
+
+    } catch (err) {
+        throw Error('Error while logging User: ' + err);
     }
 }
 

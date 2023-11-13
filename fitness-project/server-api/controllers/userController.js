@@ -5,12 +5,18 @@ const UserController = {};
 
 UserController.register = async (req, res) => {
     try {
-        const { userData, token } = await userService.register(req.body);
+        const { error, userData, token } = await userService.register(req.body);
 
-        res.json({
-            ...userData,
-            token,
-        });
+        if (error) {
+            return res.status(400).json({
+                message: 'User with such email already exists'
+            })
+        } else {
+            res.json({
+                ...userData,
+                token,
+            });
+        }
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -18,5 +24,27 @@ UserController.register = async (req, res) => {
         });
     }
 }
+
+UserController.login = async (req, res) => {
+    try {
+        const { error, userData, token } = await userService.login(req.body);
+
+        if (error) {
+            return res.status(400).json({
+                message: 'Wrong login or password',
+            });
+        } else {
+            res.json({
+                ...userData,
+                token,
+            });
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            message: 'Failed to login',
+        });
+    }
+};
 
 export default UserController;

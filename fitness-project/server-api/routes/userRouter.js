@@ -4,7 +4,7 @@ import { handleValidationErrors, checkAuth, checkIsCoach, registerValidation, lo
 
 const router = express.Router();
 
-//router.post('/auth/login', loginValidation, handleValidationErrors, UserController.login);
+router.post('/auth/login', UserController.login);
 router.post('/auth/register', UserController.register);
 
 export default router;
