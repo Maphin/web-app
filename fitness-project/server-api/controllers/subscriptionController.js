@@ -19,12 +19,12 @@ SubscriptionController.getAll = async (req, res) => {
 
 SubscriptionController.getOne = async (req, res) => {
     try {
-        const category = await subscriptionService.getOne(req.params.id);
-        res.json(category);
+        const subscription = await subscriptionService.getOne(req.params.id);
+        res.json(subscription);
     } catch (err) {
         console.log(err);
         res.status(500).json({
-            message: 'Failed to retrieve subscriptions',
+            message: 'Failed to retrieve subscription',
         });
     }
 };

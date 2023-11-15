@@ -5,6 +5,9 @@ export const dbQueries = {
     count() {
         return "SELECT COUNT(*) AS ?? FROM ??;";
     },
+    getAll() {
+        return "SELECT * FROM ??;";
+    },
     getAllWithLimit() {
         return "SELECT * FROM ?? LIMIT ?, ?;";
     },
@@ -14,9 +17,6 @@ export const dbQueries = {
     getAllCustomers() {
         return "SELECT * FROM `customers`;";
     },
-    // updateCustomerDescription() {
-    //     return "UPDATE customers SET `description` = ? WHERE id = ?;";
-    // },
     findCustomerByEmail() {
         return "SELECT * FROM customers WHERE email = ?;";
     },
@@ -32,5 +32,10 @@ export const dbQueries = {
     updateSubscription() {
         return "UPDATE subscriptions SET title = ?, description = ?, type = ?, period = ?, price = ? WHERE id = ?;"
     },
-    
+    createOrder() {
+        return "INSERT INTO orders (customer_id, subscription_id, dateEnd, trainingsLeft) VALUES (?, ?, ?, ?);";
+    },
+    updateOrder() {
+        return "UPDATE orders SET trainingsLeft = ? WHERE id = ?;"
+    },
 }

@@ -10,7 +10,7 @@ subscriptionService.getAll = async function (page, pageSize) {
     const subscriptions = await poolQuery(dbQueries.getAllWithLimit(), ['subscriptions', page * pageSize, pageSize]);
 
     if (totalCount && subscriptions.length > 0) {
-        return { subscriptions, totalCount };
+        return { subscriptions, totalCount: totalCount[0].subscriptions_count };
     }
     return {message: "Error while retrieving subscriptions"};
 };
@@ -19,7 +19,7 @@ subscriptionService.getOne = async function (subscriptionId) {
     const subscription = await poolQuery(dbQueries.findById(), ['subscriptions', subscriptionId]);
 
     if (subscription && subscription.length > 0) {
-        return { subscription };
+        return { subscription: subscription[0] };
     }
     return {message: "Error while retrieving subscription"};
 };
@@ -71,6 +71,8 @@ subscriptionService.update = async function (body, subscriptionId) {
             body.price,
             subscriptionId
         ]);
+    } else {
+        throw Error('Could not update subscription with such id');
     }
 };
 

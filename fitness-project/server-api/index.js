@@ -8,9 +8,11 @@ app.use(cors());
 
 import userRouter from './routes/userRouter.js';
 import subscriptionRouter from './routes/subscriptionRouter.js';
+import orderRouter from './routes/orderRouter.js'
 
 app.use('/api/', userRouter);
 app.use('/api/', subscriptionRouter);
+app.use('/api/', orderRouter);
 
 app.listen(config.API_SERVER_PORT, (err) => {
     if (err) {
