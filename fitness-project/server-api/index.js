@@ -7,8 +7,10 @@ app.use(express.json());
 app.use(cors());
 
 import userRouter from './routes/userRouter.js';
+import subscriptionRouter from './routes/subscriptionRouter.js';
 
 app.use('/api/', userRouter);
+app.use('/api/', subscriptionRouter);
 
 app.listen(config.API_SERVER_PORT, (err) => {
     if (err) {

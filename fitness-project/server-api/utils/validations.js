@@ -17,3 +17,8 @@ export const registerValidation = [
     body('firstName', 'Enter your First name').isLength({ min: 3 }),
     body('lastName', 'Enter your Last name').isLength({ min: 3 }),
 ];
+
+export const subscriptionCreateValidation = [
+    body('title', 'Enter the title of the subscription').isLength({ min: 3 }).isString(),
+    body('description', 'Enter the description of the subscription').isLength({ min: 3 }).isString(),
+];

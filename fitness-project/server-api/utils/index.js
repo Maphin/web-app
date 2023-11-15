@@ -4,4 +4,5 @@ export { default as handleValidationErrors } from './handleValidationErrors.js';
 export {
     registerValidation,
     loginValidation,
+    subscriptionCreateValidation,
 } from './validations.js';
