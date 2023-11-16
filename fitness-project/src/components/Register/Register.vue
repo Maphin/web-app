@@ -16,13 +16,6 @@
                         <span class="icon">
                             <i class="fa fa-pencil"></i>
                         </span>
-                        <input v-model="user.midName" type="text" id="mid-name" required />
-                        <label>Middle Name</label>
-                    </div>
-                    <div class="register__form__box">
-                        <span class="icon">
-                            <i class="fa fa-pencil"></i>
-                        </span>
                         <input v-model="user.lastName" type="text" id="last-name" required />
                         <label>Last Name</label>
                     </div>
@@ -55,7 +48,7 @@
                     <span class="icon">
                         <i class="fa fa-calendar"></i>
                     </span>
-                    <input v-model="user.dateOfBirth" type="date" class="birth" min="1910-01-01" max="2023-10-25" required />
+                    <input v-model="user.birthDate" type="date" class="birth" min="1910-01-01" max="2023-10-25" required />
                     <label class="birth">Birth Date</label>
                 </div>
                 </div>
@@ -100,6 +93,7 @@
     import { defineComponent } from 'vue';
     import 'font-awesome/css/font-awesome.min.css';
     import { vMaska } from "maska";
+    import { mapActions } from 'vuex';
     import ErrorMessage from '../common/Error/Error.vue';
     import UsersTable from '../UsersTable/UsersTable.vue';
     import { nameInputsValidation, emailValidation, passwordValidation, birthValidation } from '../common/validations/validations';
@@ -112,19 +106,17 @@
             return {
                 user: {
                     firstName: '',
-                    midName: '',
                     lastName: '',
                     email: null,
                     password: null,
+                    birthDate: null,
                     phone: null,
-                    dateOfBirth: null,
                     gender: 'Male',
-                    avatar: null
+                    //avatar: null
                 },
                 users: [],
                 errors: {
                     firstName: '',
-                    midName: '',
                     lastName: '',
                     email: '',
                     password: '',
@@ -138,27 +130,27 @@
             }
         },
         methods: {
+            ...mapActions('auth',[
+                'onRegister'
+            ]),
             onUpdateUsers(data) {
                 this.users = data.users;
             },
             clearErrors(fieldName) {
                 this.errors[fieldName] = '';
             },
-            onSubmit() {
-                if (!this.hasErrors) {
-                    const data = this.user;
-                    this.users.push(data);
-                    this.user = {
-                        firstName: '',
-                        midName: '',
-                        lastName: '',
-                        email: null,
-                        password: '',
-                        phone: null,
-                        dateOfBirth: '',
-                        gender: 'Male',
-                        avatar: null
-                    };
+            async onSubmit() {
+                try {
+                    if (!this.hasErrors) {
+                        const {gender, ...userData} = this.user;
+                        const res = await this.onRegister(userData);
+
+                        if (res) {
+                            this.$router.push({name: 'login'});
+                        }
+                    }
+                } catch (err) {
+                    console.log(err);
                 }
             }
         },
@@ -167,12 +159,6 @@
                 if (newVal) {
                     this.clearErrors('firstName');
                     this.errors.firstName = nameInputsValidation(newVal, 'First name');
-                }
-            },
-            'user.midName': function (newVal) {
-                if (newVal) {
-                    this.clearErrors('midName');
-                    this.errors.midName = nameInputsValidation(newVal, 'Middle name');
                 }
             },
             'user.lastName': function (newVal) {
@@ -193,10 +179,10 @@
                     this.errors.password = passwordValidation(newVal, this.user.password);
                 }
             },
-            'user.dateOfBirth': function (newVal) {
+            'user.birthDate': function (newVal) {
                 if (newVal) {
                     this.clearErrors('birth');
-                    this.errors.dateOfBirth = birthValidation(newVal, this.user.dateOfBirth);
+                    this.errors.birth = birthValidation(newVal, this.user.birthDate);
                 }
             },
         },

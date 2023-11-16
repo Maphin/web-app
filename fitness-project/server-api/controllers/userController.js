@@ -47,4 +47,38 @@ UserController.login = async (req, res) => {
     }
 };
 
+UserController.getMe = async (req, res) => {
+    try {
+        const { error, userData } = await userService.getUserById(req.userId);
+
+        if (error) {
+            return res.status(404).json({
+                message: 'User is not found',
+            });
+        } else {
+            res.json(userData);
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            message: 'No access',
+        });
+    }
+};
+
+UserController.getAll = async (req, res) => {
+    try {
+        const page = parseInt(req.query.page, 10) - 1 || 0;
+        const pageSize = parseInt(req.query.pageSize, 10) || config.DEFAULT_PAGE_SIZE;
+        const users = await userService.getAll(page, pageSize);
+        res.json(users);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            message: 'Failed to retrieve users',
+        });
+    }
+};
+
+
 export default UserController;

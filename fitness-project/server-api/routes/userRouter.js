@@ -4,7 +4,9 @@ import { handleValidationErrors, checkAuth, checkIsCoach, registerValidation, lo
 
 const router = express.Router();
 
-router.post('/auth/login', UserController.login);
-router.post('/auth/register', UserController.register);
+router.post('/auth/login', loginValidation, handleValidationErrors,  UserController.login);
+router.post('/auth/register', registerValidation, handleValidationErrors, UserController.register);
+router.get('/auth/me', checkAuth, UserController.getMe);
+router.get('/users', checkAuth, checkIsCoach, UserController.getAll);
 
 export default router;

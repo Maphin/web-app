@@ -11,16 +11,38 @@
             <a href="#trainers">Trainers</a>
             <a href="#blogs">Blogs</a>
         </nav>
-        <div class="header__navbar">
+        <div v-if="checkUserRole === 'guest'" class="header__navbar">
             <RouterLink to="/login">Log In</RouterLink>
+            <RouterLink to="/register">Sign Up</RouterLink>
+        </div>
+        <div v-else class="header__navbar">
+            <RouterLink @click="logout" to="/">Logout</RouterLink>
         </div>
     </header>
 </template>
 
 <script>
     import { defineComponent } from 'vue';
+    import { mapGetters, mapActions } from 'vuex';
     export default defineComponent({
-        name: 'HeaderBlock'
+        name: 'HeaderBlock',
+        computed: {
+            ...mapGetters('auth', [
+                'GET_USER_ROLE'
+            ]),
+            checkUserRole() {
+                return this.GET_USER_ROLE;
+            }
+        },
+        methods: {
+            ...mapActions('auth', [
+                'onLogout',
+            ]),
+            logout() {
+                this.onLogout();
+                this.$router.push({name: 'home'});
+            }
+        }
     })
 </script>
 

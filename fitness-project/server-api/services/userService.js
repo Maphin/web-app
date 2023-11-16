@@ -57,9 +57,6 @@ userService.register = async function (body) {
             ]);
         }
 
-        // const customers = await poolQuery(dbQueries.getAllCustomers());
-        // console.log(customers);
-
         const token = getJwtToken(doc);
         const { passwordHash, ...userData } = doc;
 
@@ -67,7 +64,7 @@ userService.register = async function (body) {
     } catch (err) {
         throw Error('Error while registering User: ' + err);
     }
-}
+};
 
 userService.login = async function (body) {
     try {
@@ -95,7 +92,35 @@ userService.login = async function (body) {
     } catch (err) {
         throw Error('Error while logging User: ' + err);
     }
-}
+};
+
+userService.getUserById = async function (userId) {
+    try {
+        let error = false;
+        const user = await poolQuery(dbQueries.findById(), ['customers', userId]);
+
+        if (!user) {
+            error = true;
+            return { error };
+        }
+
+        const { passwordHash, ...userData } = user[0];
+
+        return { error, userData };
+    } catch (err) {
+        throw Error('Error while get User by token: ' + err);
+    }
+};
+
+userService.getAll = async function (page, pageSize) {
+    const totalCount = await poolQuery(dbQueries.count(), ['users_count', 'customers']);
+    const users = await poolQuery(dbQueries.getAllWithLimit(), ['customers', page * pageSize, pageSize]);
+
+    if (totalCount && users.length > 0) {
+        return { users, totalCount: totalCount[0].users_count };
+    }
+    return {message: "Error while retrieving users"};
+};
 
 export default userService;
  

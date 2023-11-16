@@ -41,6 +41,7 @@
 <script>
     import { defineComponent } from 'vue';
     import ErrorMessage from '../common/Error/Error.vue';
+    import { mapActions } from 'vuex';
     import { emailValidation, passwordValidation } from '../common/validations/validations';
 
     export default defineComponent({
@@ -53,7 +54,8 @@
                 checkbox: false,
                 errors: {
                     email: '',
-                    password: ''
+                    password: '',
+                    submit: '',
                 }
             }
         },
@@ -63,13 +65,30 @@
             }
         },
         methods: {
+            ...mapActions('auth',[
+                'onLogin'
+            ]),
             clearErrors(fieldName) {
                 this.errors[fieldName] = '';
             },
-            onSubmit() {
-                this.email = '';
-                this.password = '';
-                this.checkbox = false;
+            async onSubmit() {
+                try {
+                    if (localStorage.getItem('token') !== null) {
+                        this.$router.push({name: 'home'});
+                        return;
+                    }
+                    if (!this.hasErrors) {
+                        const data = {email: this.email, password: this.password};
+                        const res = await this.onLogin(data);
+
+                        if (res.data && res.data.token !== null) {
+                            this.$router.push({name: 'home'});
+                        }
+                    }
+                } catch (err) {
+                    this.errors.submit = err?.response?.data?.msg;
+                    console.log(err);
+                }
             },
         },
         watch: {
@@ -84,7 +103,12 @@
                     this.clearErrors('password');
                     this.errors.password = passwordValidation(newVal, this.password);
                 }
-            }
+            },
+            'submit': function (newVal) {
+                if (newVal) {
+                    this.clearErrors('password');
+                }
+            },
         }
 
     })
