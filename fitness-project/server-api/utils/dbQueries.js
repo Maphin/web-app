@@ -26,6 +26,9 @@ export const dbQueries = {
     findById() {
         return "SELECT * FROM ?? WHERE id = ?;";
     },
+    findByCustomerId() {
+        return "SELECT * FROM ?? WHERE customer_id = ?;";
+    },
     createSubscription() {
         return "INSERT INTO subscriptions (title, description, type, period, price) VALUES (?, ?, ?, ?, ?);";
     },
@@ -37,5 +40,8 @@ export const dbQueries = {
     },
     updateOrder() {
         return "UPDATE orders SET trainingsLeft = ? WHERE id = ?;"
+    },
+    createVisit() {
+        return "INSERT INTO visits (customer_id, order_id) VALUES (?, ?);";
     },
 }

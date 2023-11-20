@@ -7,10 +7,10 @@ const poolQuery = promisify(pool.query).bind(pool);
 
 
 orderService.getAll = async function (options) {
-    const cond = options.isAdmin ? {} : { user: options.authUserId };
+    const cond = options.isCoach ? {} : { user: options.authUserId };
 
-    // if user parameter is present and authuser is isAdmin - get all orders by user creator
-    if (options.isAdmin && options.user) {
+    // if user parameter is present and authuser is isCoach - get all orders by user creator
+    if (options.isCoach && options.user) {
         cond.user = options.user;
     }
 

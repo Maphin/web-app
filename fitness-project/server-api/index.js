@@ -9,10 +9,12 @@ app.use(cors());
 import userRouter from './routes/userRouter.js';
 import subscriptionRouter from './routes/subscriptionRouter.js';
 import orderRouter from './routes/orderRouter.js'
+import visitRouter from './routes/visitRouter.js';
 
 app.use('/api/', userRouter);
 app.use('/api/', subscriptionRouter);
 app.use('/api/', orderRouter);
+app.use('/api/', visitRouter);
 
 app.listen(config.API_SERVER_PORT, (err) => {
     if (err) {
