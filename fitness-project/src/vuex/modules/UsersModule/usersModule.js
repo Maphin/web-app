@@ -21,6 +21,12 @@ export const usersModule = {
             }
             
             return res.data;
+        },
+        async GET_USER_BY_ID(_, {id}) {
+            const res = await UsersAPI.users(id);
+            if (res && res.status === 200 && res.data) {
+                return res.data;
+            }
         }
     },
     getters: {

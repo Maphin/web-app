@@ -1,7 +1,7 @@
 <template>
     <header class="header">
         <div class="header__logo">
-            <h1><span>Fit</span>Gym</h1>
+            <RouterLink to="/"><h1><span>Fit</span>Gym</h1></RouterLink>
         </div>
         <nav class="header__navbar">
             <a href="#home">Home</a>
@@ -48,6 +48,7 @@
 
 <style lang="scss" scoped>
     .header {
+        background-color: #000;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -55,10 +56,12 @@
         z-index: 10000;
         &__logo {
             font-weight: bolder;
-            color: #fff;
             font-size: 2.5rem;
-            span {
-                color: #ff0000;
+            a {
+                color: #fff;
+                span {
+                    color: #ff0000;
+                }
             }
         }
         &__navbar a {

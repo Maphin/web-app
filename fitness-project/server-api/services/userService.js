@@ -1,12 +1,10 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import config from '../config.js';
-import { pool } from '../utils/db.js';
+import { poolQuery } from '../utils/db.js';
 import { dbQueries } from '../utils/dbQueries.js';
-import { promisify } from 'util';
 
 const userService = {};
-const poolQuery = promisify(pool.query).bind(pool);
 
 const getJwtToken = (user) => {
     return jwt.sign(
@@ -98,7 +96,6 @@ userService.getUserById = async function (userId) {
     try {
         let error = false;
         const user = await poolQuery(dbQueries.findById(), ['customers', userId]);
-
         if (!user) {
             error = true;
             return { error };

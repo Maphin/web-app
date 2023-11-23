@@ -1,5 +1,5 @@
 import mysql from 'mysql2';
-import { dbQueries } from './dbQueries.js';
+import { promisify } from 'util';
 
 export const pool = mysql.createPool({
     host: 'localhost',
@@ -14,6 +14,8 @@ export const pool = mysql.createPool({
     enableKeepAlive: true,
     keepAliveInitialDelay: 0
 });
+
+export const poolQuery = promisify(pool.query).bind(pool);
 // pool.query(dbQueries.updateCustomerDescription(), ["Hi, I'm Mary", 4], function(err, rows, fields) {
 //     // console.log(rows);
 //     if (err) {

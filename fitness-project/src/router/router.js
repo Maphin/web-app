@@ -7,6 +7,8 @@ import DashboardUsers from '../components/Dashboard/Users/Users.vue';
 import DashboardSubscriptions from '../components/Dashboard/Subscriptions/Subscriptions.vue';
 import DashboardOrders from '../components/Dashboard/Orders/Orders.vue';
 import DashboardVisits from '../components/Dashboard/Visits/Visits.vue';
+import DashboardUpdateSubscription from '../components/Dashboard/Subscriptions/UpdateSubscription.vue';
+import DashboardAddSubscription from '../components/Dashboard/Subscriptions/AddSubscription.vue';
 
 // const checkoutGuard = (to, from, next) => {
 //     if (store.state.cart.length) {
@@ -71,6 +73,12 @@ const routes = [
         //beforeEnter: managerAuthGuard
     },
     {
+        path: '/dashboard/subscriptions',
+        name: 'dashboardSubscriptions',
+        component: DashboardSubscriptions,
+        //beforeEnter: managerAuthGuard
+    },
+    {
         path: '/dashboard/orders',
         name: 'dashboardOrders',
         component: DashboardOrders,
@@ -81,6 +89,19 @@ const routes = [
         name: 'dashboardVisits',
         component: DashboardVisits,
         //beforeEnter: managerAuthGuard
+    },
+    {
+        path: '/dashboard/updateSubscription/:id',
+        name: 'dashboardUpdateSubscription',
+        component: DashboardUpdateSubscription,
+        //beforeEnter: managerAuthGuard,
+        props: true,
+    },
+    {
+        path: '/dashboard/addSubscription',
+        name: 'dashboardAddSubscription',
+        component: DashboardAddSubscription,
+        //beforeEnter: managerAuthGuard,
     },
 ];
 

@@ -9,7 +9,7 @@ export const subscriptionModule = {
         }
     },
     mutations : {
-        SET_PRODUCTS_TO_STATE(state, data) {
+        SET_SUBSCRIPTIONS_TO_STATE(state, data) {
             state.subscriptions = data.subscriptions;
         },
         SET_NEW_SUBSCRIPTION(state, data) {
@@ -41,7 +41,7 @@ export const subscriptionModule = {
             const res = await SubscriptionsAPI.subscriptions(currentPage, pageSize);
             
             if (res && res.status === 200 && res.data && saveState) {
-                commit('SET_PRODUCTS_TO_STATE', res.data);
+                commit('SET_SUBSCRIPTIONS_TO_STATE', res.data);
             }
             
             return res.data;
@@ -56,7 +56,7 @@ export const subscriptionModule = {
             return res;
         },
 
-        async UPDATE_DISH({commit}, {id, title, description, type, period, price}) {
+        async UPDATE_SUBSCRIPTION({commit}, {id, title, description, type, period, price}) {
             const res = await SubscriptionsAPI.updateSubscription(id, title, description, type, period, price);
             if (res && res.status === 200 && res.data) {
                 commit('EDIT_SUBSCRIPTION', {id, title, description, type, period, price});
@@ -65,7 +65,7 @@ export const subscriptionModule = {
             return res;
         },
 
-        async GET_ONE_SUBSCRIPTION({commit}, id) {
+        async GET_ONE_SUBSCRIPTION(_, id) {
             const res = await SubscriptionsAPI.subscription(id);
 
             if (res && res.status === 200 && res.data) {

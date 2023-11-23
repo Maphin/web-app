@@ -86,7 +86,7 @@
                         }
                     }
                 } catch (err) {
-                    this.errors.submit = err?.response?.data?.msg;
+                    //this.errors.submit = err?.response?.data?.msg;
                     console.log(err);
                 }
             },

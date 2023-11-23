@@ -11,6 +11,30 @@ export const dbQueries = {
     getAllWithLimit() {
         return "SELECT * FROM ?? LIMIT ?, ?;";
     },
+    getAllOrdersWithLimit(sortRule) {
+        return `SELECT o.*, CONCAT(c.firstName, ' ', c.lastName) AS user_name, s.title AS subscription_title 
+                FROM orders o 
+                LEFT JOIN customers c ON (c.id = o.customer_id) 
+                LEFT JOIN subscriptions s ON (s.id = o.subscription_id) 
+                ORDER BY ${sortRule} 
+                LIMIT ?, ?`;
+    },
+    getAllVisitsWithLimit(sortRule) {
+        return `SELECT v.*, CONCAT(c.firstName, ' ', c.lastName) AS user_name, s.title AS subscription_title
+                FROM visits v 
+                LEFT JOIN customers c ON (c.id = v.customer_id) 
+                LEFT JOIN orders o ON (o.id = v.order_id) 
+                LEFT JOIN subscriptions s ON (o.subscription_id = s.id)
+                ORDER BY ${sortRule}
+                LIMIT ?, ?`;
+    },
+    getOneOrder() {
+        return `SELECT o.*, CONCAT(c.firstName, ' ', c.lastName) AS user_name, s.title AS subscription_title 
+                FROM orders o 
+                LEFT JOIN customers c ON (c.id = o.customer_id) 
+                LEFT JOIN subscriptions s ON (s.id = o.subscription_id) 
+                WHERE o.id = ?`;
+    },
     registerCustomer() {
         return "INSERT INTO customers (firstName, lastName, email, passwordHash, description, birthDate, phone, isCoach ) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
     },

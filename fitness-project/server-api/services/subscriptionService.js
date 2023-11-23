@@ -1,9 +1,7 @@
-import { pool } from '../utils/db.js';
+import { poolQuery } from '../utils/db.js';
 import { dbQueries } from '../utils/dbQueries.js';
-import { promisify } from 'util';
 
 const subscriptionService = {};
-const poolQuery = promisify(pool.query).bind(pool);
 
 subscriptionService.getAll = async function (page, pageSize) {
     const totalCount = await poolQuery(dbQueries.count(), ['subscriptions_count', 'subscriptions']);
@@ -19,7 +17,7 @@ subscriptionService.getOne = async function (subscriptionId) {
     const subscription = await poolQuery(dbQueries.findById(), ['subscriptions', subscriptionId]);
 
     if (subscription && subscription.length > 0) {
-        return { subscription: subscription[0] };
+        return subscription[0];
     }
     return {message: "Error while retrieving subscription"};
 };

@@ -1,10 +1,7 @@
-import { pool } from '../utils/db.js';
+import { poolQuery } from '../utils/db.js';
 import { dbQueries } from '../utils/dbQueries.js';
-import { promisify } from 'util';
 
 const orderService = {};
-const poolQuery = promisify(pool.query).bind(pool);
-
 
 orderService.getAll = async function (options) {
     const cond = options.isCoach ? {} : { user: options.authUserId };
@@ -15,7 +12,8 @@ orderService.getAll = async function (options) {
     }
 
     const totalCount = await poolQuery(dbQueries.count(), ['orders_count', 'orders']);
-    const orders = await poolQuery(dbQueries.getAllWithLimit(), ['orders', options.page * options.pageSize, options.pageSize]);
+    const sortRule = 'o.id DESC';
+    const orders = await poolQuery(dbQueries.getAllOrdersWithLimit(sortRule), [options.page * options.pageSize, options.pageSize]);
 
     if (totalCount && orders.length > 0) {
         return { orders, totalCount: totalCount[0].orders_count };
@@ -24,10 +22,10 @@ orderService.getAll = async function (options) {
 }
 
 orderService.getOne = async function (orderId) {
-    const order = await poolQuery(dbQueries.findById(), ['orders', orderId]);
+    const order = await poolQuery(dbQueries.getOneOrder(), [orderId]);
 
     if (order && order.length > 0) {
-        return { order: order[0] };
+        return order[0];
     }
     return {message: "Error while retrieving order"};
 };
@@ -49,7 +47,6 @@ orderService.create = async function (body, userId) {
             await poolQuery(dbQueries.createOrder(), [
                 userId,
                 body.subscription_id,
-                //dateStart,
                 endDate,
                 null
             ])
@@ -57,7 +54,6 @@ orderService.create = async function (body, userId) {
             await poolQuery(dbQueries.createOrder(), [
                 userId,
                 body.subscription_id,
-                //dateStart,
                 null,
                 subscription[0].period
             ])
