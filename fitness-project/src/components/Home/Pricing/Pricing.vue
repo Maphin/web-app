@@ -8,7 +8,7 @@
             <p> <i class="fa fa-check"></i> weight lifting </p>
             <p> <i class="fa fa-check"></i> diet plans </p>
             <p> <i class="fa fa-check"></i> overall results </p>
-            <a href="#" class="btn">all pricing</a>
+            <RouterLink class="btn" to="/tariff">All pricing</RouterLink>
         </div>
 
         <div class="plan basic">
