@@ -1,19 +1,27 @@
 <template>
     <section class="plans" id="plans">
-        <div class="plan basic">
-            <h3>Standard Plan</h3>
-            <div class="plan"><span>$</span>20<span>/mo</span></div>
-        <div class="list">
-            <p> <i class="fa fa-check"></i> Unlimited weekly visits. </p>
-            <p> <i class="fa fa-check"></i> 8 group classes/month. </p>
-            <p> <i class="fa fa-check"></i> 2 personal trainer sessions. </p>
-            <p> <i class="fa fa-check"></i> Sauna & steam room access. </p>
-            <p> <i class="fa fa-check"></i> 1 diet consultant session. </p>
-        </div> 
-            <a href="#" class="btn">get started</a>
+        <div class="plan basic"
+            v-for="(subscription, index) in SUBSCRIPTIONS" 
+            :key="subscription.id">
+
+            <h3>{{ subscription.title }}</h3>
+            <div class="plan">
+                <span>$</span>
+                {{ subscription.price }}
+                <span v-if="subscription.type === 0">{{subscription.period}}/mo</span>
+                <span v-else>{{subscription.period}}/tr</span>
+            </div>
+            <div class="list">
+                <p> <i class="fa fa-check"></i> Unlimited weekly visits. </p>
+                <p> <i class="fa fa-check"></i> 8 group classes/month. </p>
+                <p> <i class="fa fa-check"></i> 2 personal trainer sessions. </p>
+                <p> <i class="fa fa-check"></i> Sauna & steam room access. </p>
+                <p> <i class="fa fa-check"></i> 1 diet consultant session. </p>
+            </div> 
+            <button @click="addToCart(subscription)" class="btn">get started</button>
         </div>
 
-        <div class="plan">
+        <!-- <div class="plan">
             <h3>Premium Plan</h3>
             <div class="plan"><span>$</span>40<span>/mo</span></div>
         <div class="list">
@@ -76,14 +84,41 @@
             <p> <i class="fa fa-check"></i> 2 yoga/meditation sessions. </p>
         </div> 
             <a href="#" class="btn">get started</a>
-        </div>
+        </div> -->
     </section>
 </template>
 
 <script>
     import { defineComponent } from 'vue';
+    import { mapActions, mapGetters } from 'vuex';
+
     export default defineComponent({
-        name: 'plansPage'
+        name: 'plansPage',
+        data() {
+            return {
+
+            }
+        },
+        computed: {
+            ...mapGetters('subscriptions',[
+                'SUBSCRIPTIONS'
+            ])
+        },
+        methods: {
+            ...mapActions('subscriptions',[
+                'GET_SUBSCRIPTIONS_FROM_API'
+            ]),
+            ...mapActions('cart',[
+                'ADD_TO_CART'
+            ]),
+            addToCart(subscription) {
+                this.ADD_TO_CART(subscription);
+                this.$router.push({name: 'checkout'});
+            },
+        },
+        async mounted() {
+            await this.GET_SUBSCRIPTIONS_FROM_API({ currentPage: 1, pageSize: 10 });
+        }
     })
 </script>
 

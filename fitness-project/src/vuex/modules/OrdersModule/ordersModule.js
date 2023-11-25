@@ -36,8 +36,9 @@ export const ordersModule = {
             }
             return res;
         },
-        async CREATE_ORDER(_, {orderItems}) {
-            return await OrdersAPI.createOrder(orderItems);
+        async CREATE_ORDER(_, {subscriptionId}) {
+            console.log(subscriptionId);
+            return await OrdersAPI.createOrder(subscriptionId);
         },
         async UPDATE_ORDER({commit}, {id, trainingsLeft}) {
             const res = await OrdersAPI.updateOrder(id, trainingsLeft);

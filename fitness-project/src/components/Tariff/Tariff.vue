@@ -20,7 +20,7 @@
         data() {
             return {}
         },
-        methods: {}
+        methods: {},
     })
     
 </script>
@@ -28,7 +28,7 @@
 <style lang="scss" scoped>
 
 .tariff-page {
-        background: #000;
-        text-transform: capitalize;
-    }
+    background: #000;
+    text-transform: capitalize;
+}
 </style>

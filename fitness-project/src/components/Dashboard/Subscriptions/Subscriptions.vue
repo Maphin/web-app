@@ -74,11 +74,11 @@
               <div>{{ subscription.price }}</div>
             </td>
             <td>
-              <router-link :to="{name: 'dashboardUpdateSubscription', params:{id: subscription.id}}">
+              <RouterLink :to="{name: 'dashboardUpdateSubscription', params:{id: subscription.id}}">
                     <button class="actions actions__edit">
                         Edit
                     </button>
-                </router-link>
+                </RouterLink>
             </td>
             <td>
                 <button class="actions actions__delete" 

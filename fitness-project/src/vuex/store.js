@@ -8,6 +8,7 @@ import { usersModule } from './modules/UsersModule/usersModule';
 import { subscriptionModule } from './modules/SubscriptionsModule/subscriptionsModule';
 import { ordersModule } from './modules/OrdersModule/ordersModule';
 import { visitsModule } from './modules/VisitsModule/visitsModule';
+import { cartModule } from './modules/CartModule/cartModule';
 
 
 export const store = createStore({
@@ -22,6 +23,7 @@ export const store = createStore({
         users: usersModule,
         subscriptions: subscriptionModule,
         orders: ordersModule,
-        visits: visitsModule
+        visits: visitsModule,
+        cart: cartModule
     }
 })

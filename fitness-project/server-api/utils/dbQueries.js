@@ -5,11 +5,11 @@ export const dbQueries = {
     count() {
         return "SELECT COUNT(*) AS ?? FROM ??;";
     },
-    getAll() {
-        return "SELECT * FROM ??;";
+    getAll(sortRule) {
+        return `SELECT * FROM ?? ORDER BY ${sortRule};`;
     },
-    getAllWithLimit() {
-        return "SELECT * FROM ?? LIMIT ?, ?;";
+    getAllWithLimit(sortRule) {
+        return `SELECT * FROM ?? ORDER BY ${sortRule} LIMIT ?, ?;`;
     },
     getAllOrdersWithLimit(sortRule) {
         return `SELECT o.*, CONCAT(c.firstName, ' ', c.lastName) AS user_name, s.title AS subscription_title 
