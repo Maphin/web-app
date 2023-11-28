@@ -167,6 +167,8 @@
             display: flex;
             input {
                 margin-right: 2rem;
+                font-size: 1.2rem;
+                padding-left: .5rem;
             }
         }
 

@@ -47,14 +47,15 @@
                     class="form-input"
                     id="price" type="number" placeholder="Enter price" />
             </div>
-            <div class="form-group">
+            <div class="form-group-button">
                 <button class="form-button">
                     Add Subscription
                 </button>
             </div>
-            <!-- <ErrorMessage :errors="errors"
-                          :hasErrors = "hasErrors"
-            /> -->
+            <ErrorMessage :errors="errors"
+                          :hasErrors = "errorFlag"
+                        class="errors"
+            />
         </form>
     </div>
 </template>
@@ -65,7 +66,7 @@
     import { mapActions} from 'vuex';
     import Select from '@/components/common/Select/Select.vue';
     import ErrorMessage from '@/components/common/Error/Error.vue';
-    import { nameInputsValidation } from '../../common/validations/validations.js';
+    import { nameInputsValidation, periodValidation, priceValidation, hasErrors } from '../../common/validations/validations.js';
 
     export default defineComponent({
         name: 'DashboardAddSubscription',
@@ -84,17 +85,20 @@
                 }
             }
         },
-        computed: {
-            //hasErrors()
-        },
         methods: {
             ...mapActions('subscriptions',[
                 'CREATE_SUBSCRIPTION'
             ]),
+            clearErrors(fieldName) {
+                this.errors[fieldName] = '';
+            },
+            errorFlag() {
+                return hasErrors(this.errors);
+            },
             async onSubmit() {
                 try {
                     if (!this.price) {
-                        this.errors.price = 'Enter the price';
+                        this.errors.price = 'Enter the price!';
                         return;
                     };
                     let subType = '';
@@ -111,32 +115,33 @@
                         this.$router.push({name: 'dashboardSubscriptions'});
                     }
                 } catch (err) {
-                    console.log(err.response.data[0].msg);
+                    console.log(err.response.data.message);
                 }
             },
             chooseType(type) {
                 this.type = type;
             },
         },
-        // watch: {
-        //     'title': function (newVal) {
-        //         if (newVal) {
-        //             this.clearErrors('title');
-        //             this.errors.title = nameInputsValidation(newVal, this.title);
-        //         }
-        //     },
-        //     'price': function (newVal) {
-        //         if (newVal) {
-        //             this.clearErrors('price');
-        //             this.errors.price = priceValidation(newVal, this.price);
-        //         }
-        //     },
-        //     'period': function (newVal) {
-        //         if (newVal) {
-        //             this.clearErrors('period');
-        //         }
-        //     },
-        // }
+        watch: {
+            'title': function (newVal) {
+                if (newVal) {
+                    this.clearErrors('title');
+                    this.errors.title = nameInputsValidation(newVal, "Title");
+                }
+            },
+            'price': function (newVal) {
+                if (newVal) {
+                    this.clearErrors('price');
+                    this.errors.price = priceValidation(newVal);
+                }
+            },
+            'period': function (newVal) {
+                if (newVal) {
+                    this.clearErrors('period');
+                       this.errors.period = periodValidation(newVal);
+                }
+            },
+        }
     })
 </script>
 
@@ -181,7 +186,12 @@
     .form-group {
         margin-bottom: 1.5rem;
     }
-
+    .form-group-button {
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     .form-label {
         display: block;
         font-size: 2rem;
@@ -191,6 +201,7 @@
 
     .form-button {
         width: 70%;
+        height: 3.6rem;
         background-color: #4299e1;
         color: #fff;
         font-size: 1.5rem;
@@ -201,5 +212,10 @@
         &:hover {
             background-color: #3182ce;
         }
+    }
+    .errors {
+        display: flex;
+        text-align: center;
+        justify-content: center;
     }
 </style>

@@ -180,12 +180,13 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-
         &__wrapper {
             width: 33.333333%;
             display: flex;
             input {
                 margin-right: 2rem;
+                font-size: 1.2rem;
+                padding-left: .5rem;
             }
         }
 

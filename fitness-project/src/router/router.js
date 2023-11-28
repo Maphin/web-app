@@ -11,6 +11,7 @@ import DashboardOrders from '../components/Dashboard/Orders/Orders.vue';
 import DashboardVisits from '../components/Dashboard/Visits/Visits.vue';
 import DashboardUpdateSubscription from '../components/Dashboard/Subscriptions/UpdateSubscription.vue';
 import DashboardAddSubscription from '../components/Dashboard/Subscriptions/AddSubscription.vue';
+import { UserRoles } from "@/vuex/modules/AuthModule/authModule";
 
 // const checkoutGuard = (to, from, next) => {
 //     if (store.state.cart.length) {
@@ -33,7 +34,7 @@ const managerAuthGuard = (to, from, next) => {
     const isAuthorized = localStorage.hasOwnProperty('token');
     if (!isAuthorized) {
         next({name: 'login'});
-    } else if (localStorage.getItem('userRole') !== UserRoles.Admin) {
+    } else if (localStorage.getItem('userRole') !== UserRoles.Coach) {
         next({name: 'home'});
     } else {
         next();
@@ -65,7 +66,8 @@ const routes = [
         path: '/checkout',
         name: 'checkout',
         component: Checkout,
-        props: true
+        props: true,
+        beforeEnter: authGuard
     },
     {
         path: '/dashboard',

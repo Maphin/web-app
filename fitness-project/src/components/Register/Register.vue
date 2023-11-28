@@ -78,13 +78,10 @@
                 </div>
                 <button type="submit" id="submit" class="btn__login">Submit</button>
                 <ErrorMessage :errors="errors"
-                              :hasErrors = "hasErrors"
+                              :hasErrors = "errorFlag"
                 />
             </form>
         </section>
-        <UsersTable :usersList="users"
-                    @updateParent="onUpdateUsers"/>
-        
     </div>
     
 </template>
@@ -95,12 +92,11 @@
     import { vMaska } from "maska";
     import { mapActions } from 'vuex';
     import ErrorMessage from '../common/Error/Error.vue';
-    import UsersTable from '../UsersTable/UsersTable.vue';
-    import { nameInputsValidation, emailValidation, passwordValidation, birthValidation } from '../common/validations/validations';
+    import { nameInputsValidation, emailValidation, passwordValidation, phoneValidation, birthValidation, hasErrors } from '../common/validations/validations';
 
     export default defineComponent({
         name: 'RegisterForm',
-        components: {ErrorMessage, UsersTable},
+        components: {ErrorMessage},
         directives: {maska: vMaska},
         data() {
             return {
@@ -120,24 +116,20 @@
                     lastName: '',
                     email: '',
                     password: '',
+                    phone: '',
                     birth: '',
                 },
-            }
-        },
-        computed: {
-            hasErrors() {
-                return Object.values(this.errors).some(error => error !== '');
             }
         },
         methods: {
             ...mapActions('auth',[
                 'onRegister'
             ]),
-            onUpdateUsers(data) {
-                this.users = data.users;
-            },
             clearErrors(fieldName) {
                 this.errors[fieldName] = '';
+            },
+            errorFlag() {
+                return hasErrors(this.errors);
             },
             async onSubmit() {
                 try {
@@ -170,19 +162,25 @@
             'user.email': function (newVal) {
                 if (newVal) {
                     this.clearErrors('email');
-                    this.errors.email = emailValidation(newVal, this.user.email);
+                    this.errors.email = emailValidation(newVal);
                 }
             },
             'user.password': function (newVal) {
                 if (newVal) {
                     this.clearErrors('password');
-                    this.errors.password = passwordValidation(newVal, this.user.password);
+                    this.errors.password = passwordValidation(newVal);
+                }
+            },
+            'user.phone': function (newVal) {
+                if (newVal) {
+                    this.clearErrors('phone');
+                    this.errors.password = phoneValidation(newVal);
                 }
             },
             'user.birthDate': function (newVal) {
                 if (newVal) {
                     this.clearErrors('birth');
-                    this.errors.birth = birthValidation(newVal, this.user.birthDate);
+                    this.errors.birth = birthValidation(newVal);
                 }
             },
         },
