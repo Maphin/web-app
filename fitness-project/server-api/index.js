@@ -16,7 +16,7 @@ app.use('/api/', subscriptionRouter);
 app.use('/api/', orderRouter);
 app.use('/api/', visitRouter);
 
-app.listen(config.API_SERVER_PORT, (err) => {
+app.listen(4444, (err) => {
     if (err) {
         return console.log(err);
     }

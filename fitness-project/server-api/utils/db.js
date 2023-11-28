@@ -4,7 +4,7 @@ import { promisify } from 'util';
 export const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'davidmysql123!',
+    password: 'nata159753',
     database: 'fitnessdb',
     waitForConnections: true,
     connectionLimit: 10,

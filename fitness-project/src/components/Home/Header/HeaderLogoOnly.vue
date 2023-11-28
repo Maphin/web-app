@@ -3,20 +3,8 @@
         <div class="header__logo">
             <RouterLink to="/"><h1><span>Fit</span>Gym</h1></RouterLink>
         </div>
-        <nav class="header__navbar">
-            <a href="/#home">Home</a>
-            <a href="/#about">About</a>
-            <a href="/#features">Features</a>
-            <a href="/#pricing">Pricing</a>
-            <a href="/#trainers">Trainers</a>
-            <a href="/#blogs">Blogs</a>
-        </nav>
-        <div v-if="checkUserRole === 'guest'" class="header__navbar">
-            <RouterLink to="/login">Log In</RouterLink>
-            <RouterLink to="/register">Sign Up</RouterLink>
-        </div>
         <div v-else class="header__navbar">
-            <RouterLink @click="logout" to="/">Logout</RouterLink>
+            <RouterLink class="header__navbar" @click="logout" to="/">Logout</RouterLink>
         </div>
     </header>
 </template>
@@ -56,6 +44,7 @@
         z-index: 10000;
         &__logo {
             font-weight: bolder;
+
             font-size: 2.5rem;
             a {
                 color: #fff;
@@ -63,8 +52,7 @@
                     color: #ff0000;
                 }
             }
-        }
-        &__navbar a {
+        }&__navbar a {
             display: inline-block;
             padding: 1.5rem 2rem;
             font-size: 1.7rem;

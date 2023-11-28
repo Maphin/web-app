@@ -21,14 +21,6 @@
                     id="description" placeholder="Enter description">
                 </textarea>
             </div>
-            <!-- <div class="form-group">
-                <input type="file" name="image" id="image" @change="uploadImage" class="hidden" />
-                <label for="image" class="file-upload-label">
-                    <svg class="file-upload-icon"></svg>
-                    <span class="file-upload-text">Upload Image</span>
-                </label>
-                <img v-if="imageUrl" :src="imageHostName + imageUrl" class="uploaded-image" />
-            </div> -->
             <div class="form-group">
                 <label class="form-label" for="title">
                     Select subscription's type
@@ -39,14 +31,6 @@
                     @select="chooseType"
                 />
             </div>
-            <!-- <div class="form-group">
-                <label class="form-label" for="type">
-                    Type
-                </label>
-                <input v-model.trim="type"
-                    class="form-input"
-                    id="type" type="input" />
-            </div> -->
             <div class="form-group">
                 <label class="form-label" for="type">
                     Period
@@ -63,22 +47,24 @@
                     class="form-input"
                     id="price" type="number" placeholder="Enter price" />
             </div>
-            <div class="form-group">
+            <div class="form-group-button">
                 <button class="form-button">
                     Save
                 </button>
             </div>
             <ErrorMessage :errors="errors"
-                          :hasErrors = "hasErrors"
+                          :hasErrors = "errorFlag"
+                        class="errors"
             />
         </form>
     </div>
 </template>
 
 <script>
-    import Header from '@/components/Home/Header/Header.vue';
+    import Header from '@/components/Home/Header/HeaderLogoOnly.vue';
     import { defineComponent } from "vue";
     import { mapActions} from 'vuex';
+    import { nameInputsValidation, periodValidation, priceValidation, hasErrors } from '../../common/validations/validations.js';
     import Select from '@/components/common/Select/Select.vue';
     import ErrorMessage from '@/components/common/Error/Error.vue';
 
@@ -104,14 +90,17 @@
                 }
             }
         },
-        computed: {
-            //hasErrors()
-        },
         methods: {
             ...mapActions('subscriptions',[
                 'UPDATE_SUBSCRIPTION',
                 'GET_ONE_SUBSCRIPTION',
             ]),
+            clearErrors(fieldName) {
+                this.errors[fieldName] = '';
+            },
+            errorFlag() {
+                return hasErrors(this.errors);
+            },
             async onSubmit() {
                 try {
                     if (!this.price) {
@@ -137,7 +126,27 @@
             },
             chooseType(type) {
                 this.type = type;
-            }
+            },
+        },
+        watch: {
+            'title': function (newVal) {
+                if (newVal) {
+                    this.clearErrors('title');
+                    this.errors.title = nameInputsValidation(newVal, "Title");
+                }
+            },
+            'price': function (newVal) {
+                if (newVal) {
+                    this.clearErrors('price');
+                    this.errors.price = priceValidation(newVal, this.price);
+                }
+            },
+            'period': function (newVal) {
+                if (newVal) {
+                    this.clearErrors('period');
+                    this.errors.period = periodValidation(newVal, this.period);
+                }
+            },
         },
         async mounted() {
             const subscription = await this.GET_ONE_SUBSCRIPTION(this.id);
@@ -196,6 +205,13 @@
         margin-bottom: 1.5rem;
     }
 
+    .form-group-button {
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .form-label {
         display: block;
         font-size: 2rem;
@@ -205,6 +221,7 @@
 
     .form-button {
         width: 70%;
+        height: 3.6rem;
         background-color: #4299e1;
         color: #fff;
         font-size: 1.5rem;
@@ -215,5 +232,10 @@
         &:hover {
             background-color: #3182ce;
         }
+    }
+    .errors {
+        display: flex;
+        text-align: center;
+        justify-content: center;
     }
 </style>

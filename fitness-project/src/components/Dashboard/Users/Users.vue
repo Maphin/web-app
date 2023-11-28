@@ -78,7 +78,7 @@
 <script>
     import { defineComponent } from 'vue';
     import { mapGetters, mapActions } from 'vuex';
-    import Header from '@/components/Home/Header/Header.vue';
+    import Header from '@/components/Home/Header/HeaderLogoOnly.vue';
     import { formatDate } from '@/components/common/FormatDate/formatDate';
 
     export default defineComponent({
@@ -106,7 +106,7 @@
             }
         },
         mounted() {
-            this.GET_USERS_FROM_API({ currentPage: 1, pageSize: 10 });
+            this.GET_USERS_FROM_API({ currentPage: 1, pageSize: 14 });
         }
     })
 </script>
@@ -141,6 +141,8 @@
             display: flex;
             input {
                 margin-right: 2rem;
+                font-size: 1.2rem;
+                padding-left: .5rem;
             }
         }
 

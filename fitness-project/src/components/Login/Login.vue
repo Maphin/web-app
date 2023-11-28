@@ -30,7 +30,7 @@
                         <p>Don't have an account? <RouterLink to="/register">Sign Up</RouterLink></p>
                     </div>
                     <ErrorMessage :errors="errors"
-                                  :hasErrors = "hasErrors"
+                                  :hasErrors = "errorFlag"
                     />
                 </form>
             </div>
@@ -42,7 +42,7 @@
     import { defineComponent } from 'vue';
     import ErrorMessage from '../common/Error/Error.vue';
     import { mapActions } from 'vuex';
-    import { emailValidation, passwordValidation } from '../common/validations/validations';
+    import { emailValidation, passwordValidation, hasErrors } from '../common/validations/validations';
 
     export default defineComponent({
         name: 'LogindForm',
@@ -59,17 +59,15 @@
                 }
             }
         },
-        computed: {
-            hasErrors() {
-                return Object.values(this.errors).some(error => error !== '');
-            }
-        },
         methods: {
             ...mapActions('auth',[
                 'onLogin'
             ]),
             clearErrors(fieldName) {
                 this.errors[fieldName] = '';
+            },
+            errorFlag() {
+                return hasErrors(this.errors);
             },
             async onSubmit() {
                 try {
@@ -95,13 +93,13 @@
             'email': function (newVal) {
                 if (newVal) {
                     this.clearErrors('email');
-                    this.errors.email = emailValidation(newVal, this.email);
+                    this.errors.email = emailValidation(newVal);
                 }
             },
             'password': function (newVal) {
                 if (newVal) {
                     this.clearErrors('password');
-                    this.errors.password = passwordValidation(newVal, this.password);
+                    this.errors.password = passwordValidation(newVal);
                 }
             },
             'submit': function (newVal) {

@@ -35,7 +35,6 @@ userService.register = async function (body) {
             phone: body.phone,
             isCoach: body.isCoach
         };
-
         const rows = await poolQuery(dbQueries.findCustomerByEmail(), [doc.email]);
         let error = false;
 
