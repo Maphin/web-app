@@ -38,7 +38,7 @@
                 <p>subscribe for latest promos</p>
                 <form action="" class="feed-form">
                     <input type="email" name="" class="email" placeholder="enter your email">
-                    <input type="submit" value="subscribe" class="btn">
+                    <input type="submit" value="subscribe" class="btn-main">
                     <div class="pulse">
                         <i class="fa fa-bell"></i>
                     </div>

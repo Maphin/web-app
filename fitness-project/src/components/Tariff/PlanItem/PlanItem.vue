@@ -15,7 +15,7 @@
                 <p> <i class="fa fa-check"></i> Sauna & steam room access. </p>
                 <p> <i class="fa fa-check"></i> 1 diet consultant session. </p>
             </div> 
-            <button @click="addToCart" class="btn">get started</button>
+            <button @click="addToCart" class="btn-main">get started</button>
         </div>
 
         <!-- <div class="plan">

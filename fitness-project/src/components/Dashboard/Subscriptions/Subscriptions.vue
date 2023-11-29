@@ -89,7 +89,7 @@
           </tr>
         </tbody>
       </table>
-      <!-- <Paginator :paginatorName="'users'"/> -->
+      <Paginator :paginatorName="'subscriptions'"/>
     </div>
   </template>
 
@@ -97,10 +97,11 @@
     import { defineComponent } from 'vue';
     import { mapGetters, mapActions } from 'vuex';
     import Header from '@/components/Home/Header/HeaderLogoOnly.vue';
+    import Paginator from '@/components/common/Paginator/Paginator.vue';
 
     export default defineComponent({
         name: 'DashboardSubscriptions',
-        components: {Header},
+        components: { Header, Paginator },
         data() {
             return {
                 search: ''
@@ -116,7 +117,6 @@
         },
         methods: {
           ...mapActions('subscriptions', [
-                'GET_SUBSCRIPTIONS_FROM_API',
                 'DELETE_SUBSCRIPTION',
             ]),
             confirmDelete(id) {
@@ -131,9 +131,6 @@
                 }
             }
         },
-        async mounted() {
-            await this.GET_SUBSCRIPTIONS_FROM_API({ currentPage: 1, pageSize: 10 });
-        }
     })
 </script>
 
@@ -166,9 +163,17 @@
             width: 33.333333%;
             display: flex;
             input {
-                margin-right: 2rem;
-                font-size: 1.2rem;
-                padding-left: .5rem;
+                margin-left: .3rem;
+                width: 50%;
+                padding: 10px;
+                box-sizing: border-box;
+                border: 2px solid #ddd;
+                border-radius: 25px;
+                outline: none;
+                font-size: 16px;
+                background: #fff url('https://img.icons8.com/ios-filled/50/000000/search.png') no-repeat 95% 50%;
+                background-size: 20px;
+                transition: border-color 0.3s;
             }
         }
 
@@ -204,6 +209,7 @@
     .table {
         border-top: 1px solid #E5E7EB;
         min-width: 100%;
+        margin-bottom: 4rem;
 
         th {
             font-size: 1.75rem;
@@ -242,6 +248,7 @@
     }
     .actions {
         padding: 0, 1.25rem, 0, 1.25rem;
+        margin-left: 2rem;
         width: 80%;
         border-radius: 0.5rem; 
         border-width: 1px; 

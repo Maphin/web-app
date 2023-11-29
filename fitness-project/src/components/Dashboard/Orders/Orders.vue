@@ -22,7 +22,7 @@
         <thead>
           <tr>
             <th scope="col">
-              №
+              Order ID
             </th>
             <th scope="col">
               Customer
@@ -50,7 +50,7 @@
         <tbody class="table__body">
           <tr v-for="(order, index) in filteredOrders" :key="order.id">
             <td>
-              <div>{{ index + 1 }}</div>
+              <div>{{ order.id }}</div>
             </td>
             <td>
               <div>{{ order.user_name }}</div>
@@ -83,7 +83,7 @@
           </tr>
         </tbody>
       </table>
-      <!-- <Paginator :paginatorName="'users'"/> -->
+      <Paginator :paginatorName="'orders'"/>
 
       <OrderDetailsModal
             v-if="showDetailsModal"
@@ -99,11 +99,12 @@
     import { mapGetters, mapActions } from 'vuex';
     import Header from '@/components/Home/Header/HeaderLogoOnly.vue';
     import OrderDetailsModal from './Modals/OrderDetailsModal.vue';
-    import { formatDate } from '../../common/FormatDate/formatDate.js'
+    import Paginator from '../../common/Paginator/Paginator.vue';
+    import { formatDate } from '../../common/FormatDate/formatDate.js';
 
     export default defineComponent ({
         name: 'DashboardOrders',
-        components: {Header, OrderDetailsModal},
+        components: {Header, OrderDetailsModal, Paginator},
         data() {
             return {
                 search: '',
@@ -123,8 +124,6 @@
         },
         methods: {
             ...mapActions('orders',[
-                'GET_ORDERS_FROM_API',
-                'UPDATE_ORDER',
                 'GET_ONE_ORDER'
             ]),
             async showDetails(orderId) {
@@ -144,13 +143,6 @@
             },
             formatDate(date) {
                 return formatDate(date);
-            }
-        },
-        async mounted() {
-            try {
-                await this.GET_ORDERS_FROM_API({ currentPage: 1, pageSize: 10 });
-            } catch (err) {
-                console.log(err);
             }
         }
     })
@@ -184,9 +176,17 @@
             width: 33.333333%;
             display: flex;
             input {
-                margin-right: 2rem;
-                font-size: 1.2rem;
-                padding-left: .5rem;
+                margin-left: .3rem;
+                width: 50%;
+                padding: 10px;
+                box-sizing: border-box;
+                border: 2px solid #ddd;
+                border-radius: 25px;
+                outline: none;
+                font-size: 16px;
+                background: #fff url('https://img.icons8.com/ios-filled/50/000000/search.png') no-repeat 95% 50%;
+                background-size: 20px;
+                transition: border-color 0.3s;
             }
         }
 
@@ -222,6 +222,7 @@
     .table {
         border-top: 1px solid #E5E7EB;
         min-width: 100%;
+        margin-bottom: 4rem;
 
         th {
             font-size: 1.75rem;

@@ -6,7 +6,7 @@
             <h3>what our clients says</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat fugit mollitia totam nemo. Facilis commodi qui doloribus id possimus, placeat earum repudiandae vero nihil illo. Quia fugit esse eveniet dolore!
             Harum quas delectus inventore</p>
-            <a href="#" class="btn">read more</a>
+            <a href="#" class="btn-main">read more</a>
         </div>
 
         <div class="review-slider">

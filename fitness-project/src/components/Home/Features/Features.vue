@@ -10,7 +10,7 @@
                     <img src="../../../assets/icons/biceps.png" alt="icon1">
                     <h3>body building</h3>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, porro.</p>
-                    <a href="#" class="btn">read more</a>
+                    <a href="#" class="btn-main">read more</a>
                 </div>
             </div>
             <div class="box box__second">
@@ -21,7 +21,7 @@
                     <img src="../../../assets/icons/woman.png" alt="icon2">
                     <h3>fitness</h3>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, porro.</p>
-                    <a href="#" class="btn">read more</a>
+                    <a href="#" class="btn-main">read more</a>
                 </div>
             </div>
             <div class="box">
@@ -32,7 +32,7 @@
                     <img src="../../../assets/icons/weightlifting.png" alt="icon3">
                     <h3>powerlifting</h3>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, porro.</p>
-                    <a href="#" class="btn">read more</a>
+                    <a href="#" class="btn-main">read more</a>
                 </div>
             </div>
         </div>
