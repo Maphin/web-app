@@ -14,7 +14,7 @@
 
 <script>
     import { defineComponent } from 'vue';
-    import Header from '../Home/Header/Header.vue';
+    import Header from '../Home/Header/HeaderLogoOnly.vue';
     import PlanItem from './PlanItem/PlanItem.vue';
     import Footer from '../Home/Footer/Footer.vue';
     import { mapActions, mapGetters } from 'vuex';

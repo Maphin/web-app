@@ -4,7 +4,8 @@
             <RouterLink to="/"><h1><span>Fit</span>Gym</h1></RouterLink>
         </div>
         <div class="header__navbar">
-            <RouterLink class="header__navbar" @click="logout" to="/">Logout</RouterLink>
+            <RouterLink to="/profile">Your Profile</RouterLink>
+            <RouterLink  @click="logout" to="/">Logout</RouterLink>
         </div>
     </header>
 </template>

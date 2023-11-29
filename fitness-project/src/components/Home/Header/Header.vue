@@ -16,6 +16,7 @@
             <RouterLink to="/register">Sign Up</RouterLink>
         </div>
         <div v-else class="header__navbar">
+            <RouterLink to="/profile">Your Profile</RouterLink>
             <RouterLink @click="logout" to="/">Logout</RouterLink>
         </div>
     </header>

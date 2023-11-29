@@ -59,6 +59,7 @@
 <style lang="scss" scoped>
     @import '../../../assets/styles/base/mixins';
     .footer {
+        background-color: #000;
         &__container {
             @include grid(25rem);
         }

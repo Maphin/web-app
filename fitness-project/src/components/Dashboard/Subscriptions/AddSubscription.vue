@@ -61,7 +61,7 @@
 </template>
 
 <script>
-    import Header from '@/components/Home/Header/Header.vue';
+    import Header from '@/components/Home/Header/HeaderLogoOnly.vue';
     import { defineComponent } from "vue";
     import { mapActions} from 'vuex';
     import Select from '@/components/common/Select/Select.vue';

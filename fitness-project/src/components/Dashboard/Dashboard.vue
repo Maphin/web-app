@@ -41,9 +41,9 @@
     }
     a {
         color: #fff;
-        margin: 1rem 0; // збільшено відступ між посиланнями
-        padding: 0.8rem 1.2rem; // збільшено розмір посилань
-        font-size: 3rem; // збільшено розмір шрифту
+        margin: 1rem 0; 
+        padding: 0.8rem 1.2rem; 
+        font-size: 3rem; 
         text-decoration: none;
         border-radius: 4px;
 

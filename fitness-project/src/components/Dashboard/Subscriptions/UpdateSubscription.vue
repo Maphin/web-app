@@ -61,7 +61,7 @@
 </template>
 
 <script>
-    import Header from '@/components/Home/Header/Header.vue';
+    import Header from '@/components/Home/Header/HeaderLogoOnly.vue';
     import { defineComponent } from "vue";
     import { mapActions} from 'vuex';
     import { nameInputsValidation, periodValidation, priceValidation, hasErrors } from '../../common/validations/validations.js';
