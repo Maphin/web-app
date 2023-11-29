@@ -3,7 +3,7 @@
         <div class="header__logo">
             <RouterLink to="/"><h1><span>Fit</span>Gym</h1></RouterLink>
         </div>
-        <div v-else class="header__navbar">
+        <div class="header__navbar">
             <RouterLink class="header__navbar" @click="logout" to="/">Logout</RouterLink>
         </div>
     </header>
