@@ -40,5 +40,6 @@
         margin-top: 1rem;
         color: red;
         font-size: 1.4rem;
+        list-style: none;
     }
 </style>

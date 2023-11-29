@@ -3,6 +3,7 @@ import Register from '../components/Register/Register.vue';
 import Login from '../components/Login/Login.vue';
 import Tariff from '../components/Tariff/Tariff.vue';
 import Home from '../components/Home/Home.vue';
+import Checkout from '../components/Checkout/Checkout.vue';
 import Dashboard from '../components/Dashboard/Dashboard.vue';
 import DashboardUsers from '../components/Dashboard/Users/Users.vue';
 import DashboardSubscriptions from '../components/Dashboard/Subscriptions/Subscriptions.vue';
@@ -10,6 +11,7 @@ import DashboardOrders from '../components/Dashboard/Orders/Orders.vue';
 import DashboardVisits from '../components/Dashboard/Visits/Visits.vue';
 import DashboardUpdateSubscription from '../components/Dashboard/Subscriptions/UpdateSubscription.vue';
 import DashboardAddSubscription from '../components/Dashboard/Subscriptions/AddSubscription.vue';
+import { UserRoles } from "@/vuex/modules/AuthModule/authModule";
 
 // const checkoutGuard = (to, from, next) => {
 //     if (store.state.cart.length) {
@@ -32,7 +34,7 @@ const managerAuthGuard = (to, from, next) => {
     const isAuthorized = localStorage.hasOwnProperty('token');
     if (!isAuthorized) {
         next({name: 'login'});
-    } else if (localStorage.getItem('userRole') !== UserRoles.Admin) {
+    } else if (localStorage.getItem('userRole') !== UserRoles.Coach) {
         next({name: 'home'});
     } else {
         next();
@@ -59,6 +61,13 @@ const routes = [
         path: '/tariff',
         name: 'tariff',
         component: Tariff
+    },
+    {
+        path: '/checkout',
+        name: 'checkout',
+        component: Checkout,
+        props: true,
+        beforeEnter: authGuard
     },
     {
         path: '/dashboard',

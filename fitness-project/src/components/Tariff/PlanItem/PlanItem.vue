@@ -1,9 +1,6 @@
 <template>
     <section class="plans" id="plans">
-        <div class="plan basic"
-            v-for="(subscription, index) in SUBSCRIPTIONS" 
-            :key="subscription.id">
-
+        <div class="plan basic">
             <h3>{{ subscription.title }}</h3>
             <div class="plan">
                 <span>$</span>
@@ -18,7 +15,7 @@
                 <p> <i class="fa fa-check"></i> Sauna & steam room access. </p>
                 <p> <i class="fa fa-check"></i> 1 diet consultant session. </p>
             </div> 
-            <button @click="addToCart(subscription)" class="btn">get started</button>
+            <button @click="addToCart" class="btn">get started</button>
         </div>
 
         <!-- <div class="plan">
@@ -90,100 +87,61 @@
 
 <script>
     import { defineComponent } from 'vue';
-    import { mapActions, mapGetters } from 'vuex';
 
     export default defineComponent({
-        name: 'plansPage',
-        data() {
-            return {
-
+        name: 'PlanItem',
+        props: {
+            subscription: {
+                type: Object
             }
         },
-        computed: {
-            ...mapGetters('subscriptions',[
-                'SUBSCRIPTIONS'
-            ])
-        },
         methods: {
-            ...mapActions('subscriptions',[
-                'GET_SUBSCRIPTIONS_FROM_API'
-            ]),
-            ...mapActions('cart',[
-                'ADD_TO_CART'
-            ]),
-            addToCart(subscription) {
-                this.ADD_TO_CART(subscription);
-                this.$router.push({name: 'checkout'});
+            addToCart() {
+                this.$emit('addToCart', this.subscription);
             },
         },
-        async mounted() {
-            await this.GET_SUBSCRIPTIONS_FROM_API({ currentPage: 1, pageSize: 10 });
-        }
     })
 </script>
 
 <style lang="scss" scoped>
-    @import '../../../assets/styles/base/mixins';
     .plans{
-        @include grid(32rem);
-        .information{
-            span{
-                font-size: 2rem;
-                color:#ff0000;
+        .plan{
+            text-align: center;
+            padding:2rem;
+            flex-wrap: wrap;
+            &.basic{
+                background:liner-gradient(130deg, transparent 90%);
+                background: #111;
             }
             h3{
-                font-size: 4rem;
-                padding-top: .5rem;
+                font-size: 2.5rem;
+                margin:1rem 0;
                 color:#fff;
             }
-            p{
-                line-height: 2;
-                font-size: 1.4rem;
-                color: #aaa;
-                padding: 1rem 0;
-                i{
-                    padding-right: 1rem;
-                    color: #ff0000;
-                }
-            }
-        }
-        .plan{
-        text-align: center;
-        padding:2rem;
-        flex-wrap: wrap;
-        &.basic{
-            background:liner-gradient(130deg, transparent 90%);
-            background: #111;
-        }
-        h3{
-            font-size: 2.5rem;
-            margin:1rem 0;
-            color:#fff;
-        }
-        .plan{
-            font-size: 5rem;
-            font-weight: bolder;
-            color:#ff0000;
+            .plan{
+                font-size: 5rem;
+                font-weight: bolder;
+                color:#ff0000;
 
-            span{
-                color:#fff;
-                font-size: 2rem;
+                span{
+                    color:#fff;
+                    font-size: 2rem;
+                }
             }
-        }
-        .list{
-            padding:1rem 0;
-            p{
-                line-height: 2;
-                font-size: 1.4rem;
-                color: #aaa;
-                padding: 1rem 0;
-                i{
-                    padding-right: 1rem;
-                    color: #ff0000;
+            .list{
+                padding:1rem 0;
+                p{
+                    line-height: 2;
+                    font-size: 1.4rem;
+                    color: #aaa;
+                    padding: 1rem 0;
+                    i{
+                        padding-right: 1rem;
+                        color: #ff0000;
+                    }
                 }
             }
         }
-    }
     }
 
 </style>

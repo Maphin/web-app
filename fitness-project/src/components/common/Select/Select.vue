@@ -106,6 +106,9 @@
         border: 1px solid #e2e8f0;
         border-radius: 0.375rem;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        ul {
+          list-style: none;
+        }
     }
 
     .custom-option {

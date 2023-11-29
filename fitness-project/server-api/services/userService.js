@@ -110,7 +110,9 @@ userService.getUserById = async function (userId) {
 
 userService.getAll = async function (page, pageSize) {
     const totalCount = await poolQuery(dbQueries.count(), ['users_count', 'customers']);
-    const users = await poolQuery(dbQueries.getAllWithLimit(), ['customers', page * pageSize, pageSize]);
+
+    const sortRule = 'id ASC';
+    const users = await poolQuery(dbQueries.getAllWithLimit(sortRule), ['customers', page * pageSize, pageSize]);
 
     if (totalCount && users.length > 0) {
         return { users, totalCount: totalCount[0].users_count };

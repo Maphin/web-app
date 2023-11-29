@@ -61,7 +61,7 @@
 </template>
 
 <script>
-    import Header from '@/components/Home/Header/HeaderLogoOnly.vue';
+    import Header from '@/components/Home/Header/Header.vue';
     import { defineComponent } from "vue";
     import { mapActions} from 'vuex';
     import { nameInputsValidation, periodValidation, priceValidation, hasErrors } from '../../common/validations/validations.js';
@@ -204,14 +204,12 @@
     .form-group {
         margin-bottom: 1.5rem;
     }
-
     .form-group-button {
         margin-bottom: 1.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-
     .form-label {
         display: block;
         font-size: 2rem;

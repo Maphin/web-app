@@ -6,9 +6,9 @@ export const OrdersAPI = {
         const queryParams = userId ? {params: {user: userId}} : undefined;
         return DefaultAPIInstance.get(url, queryParams);
     },
-    createOrder(orderItems) {
+    createOrder(subscriptionId) {
         const url = 'orders';
-        return DefaultAPIInstance.post(url, {orderItems});
+        return DefaultAPIInstance.post(url, {subscription_id: subscriptionId});
     },
     order(id) {
         const url = `orders/${id}`;

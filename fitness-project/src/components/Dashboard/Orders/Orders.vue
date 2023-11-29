@@ -180,7 +180,6 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-
         &__wrapper {
             width: 33.333333%;
             display: flex;

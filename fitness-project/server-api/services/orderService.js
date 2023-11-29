@@ -59,8 +59,8 @@ orderService.create = async function (body, userId) {
             ])
         }
     }
-
-    const result = await poolQuery(dbQueries.getAll(), ['orders']);
+    const sortRule = 'dateStart DESC';
+    const result = await poolQuery(dbQueries.getAll(sortRule), ['orders']);
 
     if (result && result.length) {
         return result[result.length - 1];

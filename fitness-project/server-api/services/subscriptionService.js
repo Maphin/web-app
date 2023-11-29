@@ -5,7 +5,8 @@ const subscriptionService = {};
 
 subscriptionService.getAll = async function (page, pageSize) {
     const totalCount = await poolQuery(dbQueries.count(), ['subscriptions_count', 'subscriptions']);
-    const subscriptions = await poolQuery(dbQueries.getAllWithLimit(), ['subscriptions', page * pageSize, pageSize]);
+    const sortRule = 'type ASC';
+    const subscriptions = await poolQuery(dbQueries.getAllWithLimit(sortRule), ['subscriptions', page * pageSize, pageSize]);
 
     if (totalCount && subscriptions.length > 0) {
         return { subscriptions, totalCount: totalCount[0].subscriptions_count };

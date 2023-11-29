@@ -14,11 +14,11 @@
 
 <script>
     import { defineComponent } from 'vue';
-    import Header from '../Home/Header/HeaderLogoOnly.vue';
+    import Header from '../Home/Header/Header.vue';
     import PlanItem from './PlanItem/PlanItem.vue';
     import Footer from '../Home/Footer/Footer.vue';
     import { mapActions, mapGetters } from 'vuex';
-
+    
 
     export default defineComponent({
         name: 'TariffPage',
@@ -51,7 +51,7 @@
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/styles/base/mixins';
+    @import '../../assets/styles/base/mixins';
     .tariff-page {
         background: #000;
         text-transform: capitalize;

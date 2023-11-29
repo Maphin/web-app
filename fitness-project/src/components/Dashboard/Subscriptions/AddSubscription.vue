@@ -61,7 +61,7 @@
 </template>
 
 <script>
-    import Header from '@/components/Home/Header/HeaderLogoOnly.vue';
+    import Header from '@/components/Home/Header/Header.vue';
     import { defineComponent } from "vue";
     import { mapActions} from 'vuex';
     import Select from '@/components/common/Select/Select.vue';
@@ -89,7 +89,7 @@
             ...mapActions('subscriptions',[
                 'CREATE_SUBSCRIPTION'
             ]),
-             clearErrors(fieldName) {
+            clearErrors(fieldName) {
                 this.errors[fieldName] = '';
             },
             errorFlag() {
@@ -122,7 +122,7 @@
                 this.type = type;
             },
         },
-         watch: {
+        watch: {
             'title': function (newVal) {
                 if (newVal) {
                     this.clearErrors('title');
@@ -186,19 +186,17 @@
     .form-group {
         margin-bottom: 1.5rem;
     }
-
-    .form-label {
-        display: block;
-        font-size: 2rem;
-        color: #4a5568;
-        margin-bottom: 0.5rem;
-    }
-
     .form-group-button {
         margin-bottom: 1.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    .form-label {
+        display: block;
+        font-size: 2rem;
+        color: #4a5568;
+        margin-bottom: 0.5rem;
     }
 
     .form-button {
