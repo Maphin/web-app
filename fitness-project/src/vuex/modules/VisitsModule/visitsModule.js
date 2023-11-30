@@ -20,8 +20,8 @@ export const visitsModule = {
         // }
     },
     actions : {
-        async GET_VISITS_FROM_API({commit}, {currentPage, pageSize}) {
-            const res = await VisitsAPI.visits(currentPage, pageSize);
+        async GET_VISITS_FROM_API({commit}, params) {
+            const res = await VisitsAPI.visits(params);
             if (res && res.status === 200 && res.data) {
                 commit('SET_VISITS_TO_STATE', res.data);
             }

@@ -19,12 +19,24 @@ export const dbQueries = {
                 ORDER BY ${sortRule} 
                 LIMIT ?, ?`;
     },
-    getAllVisitsWithLimit(sortRule) {
+    getCountVisits(cond) {
+        if (cond) {
+            cond = ' WHERE ' + cond;
+        }
+
+        return "SELECT COUNT(*) AS ?? FROM ?? v" + cond;
+    },
+    getAllVisitsWithLimit(cond, sortRule) {
+        if (cond) {
+            cond = 'WHERE ' + cond;
+        }
+        
         return `SELECT v.*, CONCAT(c.firstName, ' ', c.lastName) AS user_name, s.title AS subscription_title
                 FROM visits v 
                 LEFT JOIN customers c ON (c.id = v.customer_id) 
                 LEFT JOIN orders o ON (o.id = v.order_id) 
                 LEFT JOIN subscriptions s ON (o.subscription_id = s.id)
+                ${cond}
                 ORDER BY ${sortRule}
                 LIMIT ?, ?`;
     },

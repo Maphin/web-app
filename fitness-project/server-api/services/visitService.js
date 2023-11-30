@@ -3,14 +3,31 @@ import { dbQueries } from '../utils/dbQueries.js';
 
 const visitService = {};
 
-visitService.getAll = async function (page, pageSize) {
-    const totalCount = await poolQuery(dbQueries.count(), ['visits_count', 'visits']);
+visitService.getAll = async function (params) {
     const sortRule = 'v.visit_date DESC';
-    const visits = await poolQuery(dbQueries.getAllVisitsWithLimit(sortRule), [page * pageSize, pageSize]);
+    let conditions = [];
+    let condition = '';
+
+    if (params.customerId) {
+        conditions.push('v.customer_id = ' + params.customerId);
+    }
+    if (params.startDate) {
+        conditions.push(`v.visit_date >= '${params.startDate}'`);
+    }
+    if (params.endDate) {
+        conditions.push(`v.visit_date <= '${params.endDate}'`);
+    }
+    if (conditions.length) {
+        condition = conditions.join(' AND ');
+    }
+
+    const totalCount = await poolQuery(dbQueries.getCountVisits(condition), ['visits_count', 'visits']);
+    const visits = await poolQuery(dbQueries.getAllVisitsWithLimit(condition, sortRule), [params.page * params.pageSize, params.pageSize]);
 
     if (totalCount && visits.length > 0) {
         return { visits, totalCount: totalCount[0].visits_count };
     }
+
     return {message: "Error while retrieving visits"};
 };
 

@@ -5,9 +5,13 @@ const VisitController = {};
 
 VisitController.getAll = async (req, res) => {
     try {
+        const customerId = parseInt(req.query.customerId, 10) || 0;
+        const startDate = req.query.startDate ? req.query.startDate + ' 00:00:00' : null;
+        const endDate = req.query.endDate ? req.query.endDate + ' 23:59:59' : null;
         const page = parseInt(req.query.page, 10) - 1 || 0;
         const pageSize = parseInt(req.query.pageSize, 10) || config.DEFAULT_PAGE_SIZE;
-        const visits = await visitService.getAll(page, pageSize);
+
+        const visits = await visitService.getAll({ customerId, startDate, endDate, page, pageSize });
         res.json(visits);
     } catch (err) {
         console.log(err);
