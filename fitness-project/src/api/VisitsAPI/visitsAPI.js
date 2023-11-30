@@ -1,9 +1,18 @@
 import { DefaultAPIInstance } from "..";
 
 export const VisitsAPI = {
-    visits(currentPage, pageSize, userId) {
-        const url = `/visits?page=${currentPage}&pageSize=${pageSize}`;
-        const queryParams = userId ? {params: {user: userId}} : undefined;
+    visits(paramsData) {
+        const url = '/visits';
+        const queryParams = {
+            params: {
+                customerId: paramsData.customerId,
+                startDate: paramsData.startDate,
+                endDate: paramsData.endDate,
+                page: paramsData.currentPage,
+                pageSize: paramsData.pageSize
+            }
+        };
+        
         return DefaultAPIInstance.get(url, queryParams);
     },
     visit(id) {

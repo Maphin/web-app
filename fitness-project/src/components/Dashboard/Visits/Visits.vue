@@ -17,7 +17,22 @@
                         class="search__input"
                         placeholder="Search by Customer's Name">
             </div>
-      </div>
+        </div>
+
+        <form action="" @submit.prevent="filterVisits">
+            <div class="">
+                <label>Start Date</label>
+                <input v-model="filter.startDate" type="date" />
+            </div>
+
+            <div class="">
+                <label>End Date</label>
+                <input v-model="filter.endDate" type="date" />
+            </div>
+
+            <button type="submit">Filter</button>
+        </form>
+
       <table class="table">
         <thead>
           <tr>
@@ -52,7 +67,7 @@
           </tr>
         </tbody>
       </table>
-      <!-- <Paginator :paginatorName="'users'"/> -->
+      <Paginator :paginatorName="'visits'"/>
     </div>
   </template>
 
@@ -60,14 +75,22 @@
     import { defineComponent } from 'vue';
     import { mapGetters, mapActions } from 'vuex';
     import Header from '@/components/Home/Header/HeaderLogoOnly.vue';
-    import { formatDate } from '../../common/FormatDate/formatDate.js'
+    import Paginator from '../../common/Paginator/Paginator.vue';
+    import { formatDate } from '../../common/FormatDate/formatDate.js';
+    import { DEFAULT_PAGE_SIZE } from '../../../config';
 
     export default defineComponent ({
         name: 'DashboardVisits',
-        components: {Header},
+        components: { Header, Paginator },
         data() {
             return {
                 search: '',
+                filter: {
+                    customerId: 0,
+                    startDate: null,
+                    endDate: null
+                },
+                currentPage: 1
             }
         },
         computed: {
@@ -85,13 +108,15 @@
             ]),
             formatDate(date) {
                 return formatDate(date);
-            }
-        },
-        async mounted() {
-            try {
-                await this.GET_VISITS_FROM_API({ currentPage: 1, pageSize: 10 });
-            } catch (err) {
-                console.log(err);
+            },
+            async filterVisits() {
+                await this.GET_VISITS_FROM_API({
+                    customerId: this.filter.customerId, 
+                    startDate: this.filter.startDate,
+                    endDate: this.filter.endDate,
+                    currentPage: this.currentPage,
+                    pageSize: DEFAULT_PAGE_SIZE,
+                });
             }
         }
     })
