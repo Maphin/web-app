@@ -36,7 +36,7 @@
           </tr>
         </thead>
         <tbody class="table__body">
-          <tr v-for="(visit, index) in VISITS" :key="visit.id">
+          <tr v-for="(visit, index) in filteredVisits" :key="visit.id">
             <td>
               <div>{{ index + 1 }}</div>
             </td>
@@ -74,15 +74,15 @@
             ...mapGetters('visits',[
                 'VISITS'
             ]),
+            filteredVisits() {
+                return this.VISITS.filter(visit => visit.user_name.toLowerCase().includes(this.search.toLowerCase()));
+            },
         },
         methods: {
             ...mapActions('visits',[
                 'GET_VISITS_FROM_API',
                 'GET_ONE_VISIT'
             ]),
-            filteredVisits() {
-                return this.VISITS.filter(visit => visit.user_name.toLowerCase().includes(this.search.toLowerCase()));
-            },
             formatDate(date) {
                 return formatDate(date);
             }
@@ -121,14 +121,21 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-
         &__wrapper {
             width: 33.333333%;
             display: flex;
             input {
-                margin-right: 2rem;
-                font-size: 1.2rem;
-                padding-left: .5rem;
+                margin-left: .3rem;
+                width: 50%;
+                padding: 10px;
+                box-sizing: border-box;
+                border: 2px solid #ddd;
+                border-radius: 25px;
+                outline: none;
+                font-size: 16px;
+                background: #fff url('https://img.icons8.com/ios-filled/50/000000/search.png') no-repeat 95% 50%;
+                background-size: 20px;
+                transition: border-color 0.3s;
             }
         }
 

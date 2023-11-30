@@ -3,7 +3,7 @@
         <span>join us now</span>
         <h3>get upto 50% discount</h3>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, porro.</p>
-        <a href="#" class="btn">get discount</a>
+        <a href="#" class="btn-main">get discount</a>
     </section>
 </template>
 

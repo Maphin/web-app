@@ -1,4 +1,4 @@
-.btn {
+.btn-main {
   margin-top: 1rem;
   display: inline-block;
   padding: 1rem 2.8rem;
@@ -9,7 +9,7 @@
   font-size: 1.7rem;
   font-weight: 500;
 }
-.btn:hover {
+.btn-main:hover {
   transform: scale(1.1);
   font-weight: 700;
 }
@@ -38,4 +38,28 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
+}
+
+/* Pagination */
+.btn {
+  height: 40px;
+  width: 40px;
+  border: none;
+  margin-inline: 5px;
+  cursor: pointer;
+}
+
+.back-btn {
+  background-color: black;
+  color: #fff;
+}
+
+.next-btn {
+  background-color: black;
+  color: #fff;
+}
+
+.btn-active {
+  background-color: gray;
+  color: white;
 }/*# sourceMappingURL=style.css.map */

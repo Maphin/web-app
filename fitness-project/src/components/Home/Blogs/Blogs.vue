@@ -10,7 +10,7 @@
                         <div class="link"> <a href="#">by user</a> <span>|</span> <a href="#">21st october, 2023</a> </div>
                         <h3>fitness is not about being better than someone else</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat fugit mollitia totam nemo. Facilis commodi qui doloribus id possimus, placeat earum repudiandae vero nihil illo.</p>
-                        <a href="#" class="btn">read more</a>
+                        <a href="#" class="btn-main">read more</a>
                     </div>
                 </div>
             </div>

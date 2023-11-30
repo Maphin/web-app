@@ -1,6 +1,6 @@
 @import 'base/mixins';
 
-.btn {
+.btn-main {
     margin-top: 1rem;
     display: inline-block;
     padding: 1rem 2.8rem;
@@ -38,4 +38,25 @@
     align-items: center;
     justify-content: center;
     padding: 2rem;
+}
+
+/* Pagination */
+.btn {
+    height: 40px;
+    width: 40px;
+    border: none;
+    margin-inline: 5px;
+    cursor: pointer;
+}
+.back-btn {
+    background-color: black;
+    color: #fff;
+}
+.next-btn {
+    background-color: black;
+    color: #fff;
+}
+.btn-active {
+    background-color: gray;
+    color: white;
 }

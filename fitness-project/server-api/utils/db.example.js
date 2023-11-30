@@ -4,7 +4,7 @@ import { promisify } from 'util';
 export const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'nata159753',
+    password: 'YOUR_PASSWORD',
     database: 'fitnessdb',
     waitForConnections: true,
     connectionLimit: 10,
@@ -16,13 +16,3 @@ export const pool = mysql.createPool({
 });
 
 export const poolQuery = promisify(pool.query).bind(pool);
-// pool.query(dbQueries.updateCustomerDescription(), ["Hi, I'm Mary", 4], function(err, rows, fields) {
-//     // console.log(rows);
-//     if (err) {
-//         console.log(err)
-//     } else {
-//         pool.query(dbQueries.getAllCustomers(), function(err, rows, fields) {
-//             console.log(rows);
-//         })
-//     }
-// });

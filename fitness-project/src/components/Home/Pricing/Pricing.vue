@@ -8,7 +8,7 @@
             <p> <i class="fa fa-check"></i> weight lifting </p>
             <p> <i class="fa fa-check"></i> diet plans </p>
             <p> <i class="fa fa-check"></i> overall results </p>
-            <RouterLink class="btn" to="/tariff">All pricing</RouterLink>
+            <RouterLink class="btn-main" to="/tariff">All pricing</RouterLink>
         </div>
 
         <div class="plan basic">
@@ -21,7 +21,7 @@
             <p> <i class="fa fa-check"></i> diet plans </p>
             <p> <i class="fa fa-check"></i> overall results </p>
         </div> 
-            <a href="#" class="btn">get started</a>
+            <a href="#" class="btn-main">get started</a>
         </div>
 
         <div class="plan">
@@ -34,7 +34,7 @@
             <p> <i class="fa fa-check"></i> diet plans </p>
             <p> <i class="fa fa-check"></i> overall results </p>
         </div> 
-            <a href="#" class="btn">get started</a>
+            <a href="#" class="btn-main">get started</a>
         </div>
     </section>
 </template>

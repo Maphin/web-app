@@ -26,7 +26,7 @@
                     <p>some lorem text will be here!</p>
                 </div>
             </div>
-            <a href="#" class="btn">read more</a>
+            <a href="#" class="btn-main">read more</a>
         </div>
     </section>
 </template>
