@@ -26,6 +26,9 @@
     box-shadow: rgba(0, 0, 0, 0.4);
     cursor: pointer;
     color: #fff;
+    &:hover {
+        background-color: #750000;
+    }
 }
 .auth-page {
     background: url('https://static.vecteezy.com/system/resources/previews/002/884/043/original/abstract-red-and-black-futuristic-gaming-background-in-livestream-free-vector.jpg');

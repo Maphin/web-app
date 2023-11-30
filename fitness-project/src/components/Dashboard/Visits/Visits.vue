@@ -17,21 +17,20 @@
                         class="search__input"
                         placeholder="Search by Customer's Name">
             </div>
-        </div>
-
-        <form action="" @submit.prevent="filterVisits">
-            <div class="">
-                <label>Start Date</label>
-                <input v-model="filter.startDate" type="date" />
+            <form class="date-filter-form" @submit.prevent="filterVisits">
+            <div class="form-group">
+                <label for="start-date">Start Date</label>
+                <input id="start-date" v-model="filter.startDate" type="date" />
             </div>
 
-            <div class="">
-                <label>End Date</label>
-                <input v-model="filter.endDate" type="date" />
+            <div class="form-group">
+                <label for="end-date">End Date</label>
+                <input id="end-date" v-model="filter.endDate" type="date" />
             </div>
 
             <button type="submit">Filter</button>
         </form>
+        </div>
 
       <table class="table">
         <thead>
@@ -98,7 +97,11 @@
                 'VISITS'
             ]),
             filteredVisits() {
-                return this.VISITS.filter(visit => visit.user_name.toLowerCase().includes(this.search.toLowerCase()));
+                if (this.VISITS !== undefined) {
+                    return this.VISITS.filter(visit => visit.user_name.toLowerCase().includes(this.search.toLowerCase()));
+                } else {
+                    return [];
+                }
             },
         },
         methods: {
@@ -144,7 +147,6 @@
         margin-left: 0.5rem;
         margin-bottom: 1rem;
         flex-direction: row;
-        justify-content: space-between;
         align-items: center;
         &__wrapper {
             width: 33.333333%;
@@ -196,6 +198,7 @@
     .table {
         border-top: 1px solid #E5E7EB;
         min-width: 100%;
+        margin-bottom: 4rem;
 
         th {
             font-size: 1.75rem;
@@ -203,7 +206,7 @@
             line-height: 1rem;
             font-weight: 500;
             letter-spacing: 0.05em;
-            text-align: left;
+            text-align: center;
             color: #6B7280;
             text-transform: uppercase;
         }
@@ -220,6 +223,7 @@
             td {
                 padding: 1rem 1.5rem;
                 white-space: nowrap;
+                text-align: center;
 
                 &:hover {
                     background-color: #f0f0f0;
@@ -232,43 +236,52 @@
             }
         }
     }
-    .actions {
-        padding: 0, 1.25rem, 0, 1.25rem;
-        width: 80%;
-        border-radius: 0.5rem; 
-        border-width: 1px; 
-        border-color: #6366F1;
-        color: #4338CA;  
-        height: 3rem; 
-        transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 300ms; 
-        transition-duration: 150ms;
+    .date-filter-form {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        
+    }
+
+    .form-group {
+        width: 48%;
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    input {
+        width: 90%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        height: 3rem;
+        background-color: #4caf50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
         cursor: pointer;
-        &__edit {
-            border-color: #6366F1;
-            color: #4338CA;  
-            &:hover {
-                color: #E0E7FF; 
-                background-color: #6366F1; 
-            }
-        }
-        &__delete {
-            border-color:red;
-            color: black;  
-            &:hover {
-                color: #E0E7FF; 
-                background-color: red; 
-            }
-        }
-        &__add {
-            height: 3.5rem;
-            width: 120%;
-            border-color: green;
-            color: black;  
-            &:hover {
-                background-color: green; 
-            }
-        } 
+        font-size: 14px;
+    }
+
+    button:hover {
+        background-color: #45a049;
     }
 </style>

@@ -42,9 +42,6 @@
             <th scope="col">
               Order details
             </th>
-            <th scope="col">
-              Check visits
-            </th>
           </tr>
         </thead>
         <tbody class="table__body">
@@ -72,12 +69,6 @@
                 <button class="actions actions__edit"
                         @click="showDetails(order.id)">
                     View details
-                </button>
-            </td>
-            <td>
-                <button class="actions actions__delete" 
-                        @click="checkVisits(order.id)">
-                    Visits
                 </button>
             </td>
           </tr>
@@ -230,7 +221,7 @@
             line-height: 1rem;
             font-weight: 500;
             letter-spacing: 0.05em;
-            text-align: left;
+            text-align: center;
             color: #6B7280;
             text-transform: uppercase;
         }
@@ -247,6 +238,7 @@
             td {
                 padding: 1rem 1.5rem;
                 white-space: nowrap;
+                text-align: center;
 
                 &:hover {
                     background-color: #f0f0f0;

@@ -59,6 +59,11 @@
                 }
             }
         },
+        computed: {
+            errorFlag() {
+                return hasErrors(this.errors);
+            },
+        },
         methods: {
             ...mapActions('auth',[
                 'onLogin'
@@ -66,16 +71,13 @@
             clearErrors(fieldName) {
                 this.errors[fieldName] = '';
             },
-            errorFlag() {
-                return hasErrors(this.errors);
-            },
             async onSubmit() {
                 try {
                     if (localStorage.getItem('token') !== null) {
                         this.$router.push({name: 'home'});
                         return;
                     }
-                    if (!this.hasErrors) {
+                    if (!this.errorFlag) {
                         const data = {email: this.email, password: this.password};
                         const res = await this.onLogin(data);
 

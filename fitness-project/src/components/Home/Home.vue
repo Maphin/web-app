@@ -28,16 +28,11 @@
 
     export default defineComponent({
         name: 'HomePage',
-        components: { Swiper, Blogs, Reviews, Banner, Trainers, Pricing, Features, About, Header, Footer },
-        data() {
-            return {}
-        },
-        methods: {}
+        components: { Swiper, Blogs, Reviews, Banner, Trainers, Pricing, Features, About, Header, Footer }
     })
 </script>
 
 <style lang="scss" scoped>
-    
     .main-page {
         background: #000;
         text-transform: capitalize;

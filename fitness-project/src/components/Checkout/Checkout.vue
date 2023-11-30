@@ -2,10 +2,10 @@
 	<Header />
 	<div class="checkout-page">
 		<div class="plans">
-			<PlanItem :subscription="subscription" :key="subscription.id" />
+			<PlanItem :subscription="subscription" :isCheckout="true" :key="subscription.id" />
 		</div>
 		<div class="payment-right">
-			<form action="" class="payment-form">
+			<form action="" class="payment-form" @submit.prevent="confirmOrder">
 				<h1 class="payment-title">Payment Details</h1>
 				<div class="payment-method">
 					<input type="radio" name="payment-method" id="method-1" checked>
@@ -39,8 +39,7 @@
 						<label for="cvv" class="payment-form-label payment-form-label-required">CVV</label>
 					</div>
 				</div>
-				<button type="submit" class="payment-form-submit-button"
-						@click="confirmOrder">
+				<button type="submit" class="payment-form-submit-button">
 					<img src="../../assets/icons/wallet.svg" alt="wallet">
 					Confirm Order
 				</button>
@@ -83,7 +82,10 @@
 		computed: {
 		  ...mapGetters('cart',[
 			'CART'
-		  ])
+		  ]),
+          errorFlag() {
+                return hasErrors(this.errors);
+            },
 		},
 		methods: {
 			...mapActions('orders',[
@@ -95,16 +97,20 @@
 			clearErrors(fieldName) {
                 this.errors[fieldName] = '';
             },
-			errorFlag() {
-                return hasErrors(this.errors);
-            },
 			async confirmOrder() {
 				try {
-					const res = await this.CREATE_ORDER({subscriptionId: this.subscription.id});
-					if (res && res.data) {
-						this.$router.push({name: 'home'});
-                        this.DELETE_EVERYTHING_FROM_CART();
-					}
+                    if (!this.errorFlag) {
+                        if (!this.cardNumber || !this.expiryDate || !this.cvv) {
+                            throw Error('Incomplete credit card information. Please fill in all required fields.');
+                        }
+
+                        const res = await this.CREATE_ORDER({subscriptionId: this.subscription.id});
+
+                        if (res && res.data) {
+                            this.$router.push({name: 'home'});
+                            this.DELETE_EVERYTHING_FROM_CART();
+					    }
+                    }
 				} catch (err) {
 					console.log(err);
 				}

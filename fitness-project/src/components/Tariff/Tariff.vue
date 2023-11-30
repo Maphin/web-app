@@ -3,7 +3,7 @@
         <Header />
         <div class="plans">
             <PlanItem 
-                v-for="subscription in SUBSCRIPTIONS"
+                v-for="(subscription, index) in SUBSCRIPTIONS"
                 :key="subscription.id"
                 :subscription="subscription"
                 @addToCart="addToCart" />
@@ -59,6 +59,7 @@
     .plans {
         @include grid(32rem);
         margin: .5rem;
-        margin-bottom: 5rem
+        margin-bottom: 3rem;
+        padding: 4rem 4%;
     }
 </style>

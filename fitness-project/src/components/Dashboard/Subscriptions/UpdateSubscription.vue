@@ -90,6 +90,11 @@
                 }
             }
         },
+        computed: {
+            errorFlag() {
+                return hasErrors(this.errors);
+            },
+        },
         methods: {
             ...mapActions('subscriptions',[
                 'UPDATE_SUBSCRIPTION',
@@ -98,21 +103,21 @@
             clearErrors(fieldName) {
                 this.errors[fieldName] = '';
             },
-            errorFlag() {
-                return hasErrors(this.errors);
-            },
             async onSubmit() {
                 try {
                     if (!this.price) {
                         this.errors.price = 'Enter the price';
                         return;
                     };
+
                     let subType = '';
+
                     if (this.type === 'Months') {
                         subType = 0;
                     } else {
                         subType = 1;
                     }
+
                     const data = {id: this.id, title: this.title, description: this.description, type: subType, period: this.period, price: this.price};
 
                     const res = await this.UPDATE_SUBSCRIPTION(data);

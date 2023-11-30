@@ -61,7 +61,7 @@
               <div>{{ subscription.title }}</div>
             </td>
             <td>
-              <div>{{ subscription.description }}</div>
+              <div>{{ truncatedText(subscription.description) }}</div>
             </td>
             <td>
               <div v-if="subscription.type === 0">Months</div>
@@ -98,6 +98,7 @@
     import { mapGetters, mapActions } from 'vuex';
     import Header from '@/components/Home/Header/HeaderLogoOnly.vue';
     import Paginator from '@/components/common/Paginator/Paginator.vue';
+    import { truncateText } from '../../common/TruncateText/truncateText';
 
     export default defineComponent({
         name: 'DashboardSubscriptions',
@@ -129,7 +130,10 @@
                 if (res.data) {
                     this.$router.push({name: 'dashboardSubscriptions'});
                 }
-            }
+            },
+            truncatedText(text) {
+                return truncateText(text);
+            },
         },
     })
 </script>
@@ -217,7 +221,7 @@
             line-height: 1rem;
             font-weight: 500;
             letter-spacing: 0.05em;
-            text-align: left;
+            text-align: center;
             color: #6B7280;
             text-transform: uppercase;
         }
@@ -232,6 +236,7 @@
             }
 
             td {
+                text-align: center;
                 padding: 1rem 1.5rem;
                 white-space: nowrap;
 
@@ -277,10 +282,11 @@
             }
         }
         &__add {
-            height: 3.5rem;
+            height: 3.2rem;
             width: 120%;
-            border-color: green;
-            color: black;  
+            background: rgb(56, 172, 56);
+            border: rgb(56, 172, 56);
+            color: #000;  
             &:hover {
                 background-color: green; 
             }

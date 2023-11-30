@@ -16,7 +16,12 @@
                     <div class="slide__content">
                         <span>be strong, be fit</span>
                         <h3>Make yourself stronger than your excuses.</h3>
-                        <a href="#" class="btn-main">get started</a>
+                        <!-- <a href="#" class="btn-main">get started</a> -->
+                        <RouterLink :to="{name: 'tariff'}">
+                            <button class="btn-main">
+                                get started
+                            </button>
+                        </RouterLink>
                     </div>
                 </div>
             </swiper-slide>
@@ -25,7 +30,11 @@
                     <div class="slide__content">
                         <span>be strong, be fit</span>
                         <h3>Make yourself stronger than your excuses.</h3>
-                        <a href="#" class="btn-main">get started</a>
+                        <RouterLink :to="{name: 'tariff'}">
+                            <button class="btn-main">
+                                get started
+                            </button>
+                        </RouterLink>
                     </div>
                 </div>
             </swiper-slide>
@@ -34,7 +43,11 @@
                     <div class="slide__content">
                         <span>be strong, be fit</span>
                         <h3>Make yourself stronger than your excuses.</h3>
-                        <a href="#" class="btn-main">get started</a>
+                        <RouterLink :to="{name: 'tariff'}">
+                            <button class="btn-main">
+                                get started
+                            </button>
+                        </RouterLink>
                     </div>
                 </div>
             </swiper-slide>

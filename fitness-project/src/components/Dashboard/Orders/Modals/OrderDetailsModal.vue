@@ -5,22 +5,18 @@
             <div v-if="order_data">
                 <div class="order-item">
                     <div class="order-item__details">
-                        <!-- <img class="order-item__image" 
-                            :src="imageHostName + order.dish.imageUrl" 
-                            :alt="order.dish.title" /> -->
+                        <img class="order-item__image" 
+                            src="https://img.freepik.com/premium-photo/digital-illustration-gym-with-word-gym-wall_605423-13237.jpg" 
+                            alt="order.dish.title" />
                         <div>
                             <p class="order-item__title">Customer: {{ order_data.user_name }}</p>
                             <p class="order-item__subscription">Subscription: {{ order_data.subscription_title }}</p>
                         </div>
                     </div>
-                    <p v-if="order_data.dateStart" class="order-item__price">Start date: {{ formatDate(order_data.dateStart) }}</p>
-                    <p v-if="order_data.dateEnd !== null" class="order-item__price">End date: {{ formatDate(order_data.dateEnd) }}</p>
-                    <p class="order-item__price">TrainingsLeft: {{ order_data.trainingsLeft }}</p>
+                    <p v-if="order_data.dateStart" class="order-item__date">Start date: {{ formatDate(order_data.dateStart) }}</p>
+                    <p v-if="order_data.dateEnd !== null" class="order-item__date">End date: {{ formatDate(order_data.dateEnd) }}</p>
+                    <p v-if="order_data.trainingsLeft" class="order-item__date">TrainingsLeft: {{ order_data.trainingsLeft }}</p>
                 </div>
-                <!-- <div class="order-total">
-                    <div class="order-total__label">Total:</div>
-                    <div class="order-total__value">{{ order_data.totalPrice }}</div>
-                </div> -->
             </div>
             <div class="modal__button">
                 <button class="close-button" @click="closeDetails">
@@ -63,7 +59,7 @@
     })
 </script>
 
-<style>
+<style lang="scss" scoped>
     .modal {
         position: fixed;
         inset: 0;
@@ -82,7 +78,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 1.5rem;
+        font-size: 2rem;
         font-weight: bold;
         margin-bottom: 1rem;
     }
@@ -95,38 +91,26 @@
         margin-bottom: 0.5rem;
     }
     .order-item__image {
-        width: 4rem;
-        height: 4rem;
+        width: 5rem;
+        height: 5rem;
         object-fit: cover;
         border-radius: 0.25rem;
         margin-right: 1rem;
+        margin-bottom: .5rem;
     }
     .order-item__title {
-        font-size: 1.125rem;
+        font-size: 1.4rem;
         font-weight: bold;
+        margin-bottom: .5rem;
     }
     .order-item__subscription {
-        font-size: 1.125rem;
+        font-size: 1.4rem;
         font-weight: bold;
     }
-    .order-item__price {
-        font-size: 1.125rem;
+    .order-item__date {
+        font-size: 1.2rem;
         font-weight: bold;
-    }
-    .order-total {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 1rem;
-    }
-    .order-total__label {
-        font-size: 1.125rem;
-        font-weight: bold;
-        margin-right: 0.5rem;
-    }
-    .order-total__value {
-        font-size: 1.125rem;
-        font-weight: bold;
+        margin-bottom: .5rem;
     }
     .modal__button {
         display: flex;

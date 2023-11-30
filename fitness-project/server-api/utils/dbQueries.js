@@ -47,6 +47,14 @@ export const dbQueries = {
                 LEFT JOIN subscriptions s ON (s.id = o.subscription_id) 
                 WHERE o.id = ?`;
     },
+    getUserInfo() {
+        return `SELECT c.*, s.title AS subscription_title 
+                FROM customers c 
+                LEFT JOIN orders o ON (o.customer_id = c.id) 
+                LEFT JOIN subscriptions s ON (o.subscription_id = s.id)
+                WHERE c.id = ?
+                ORDER BY o.dateStart DESC`
+    },
     registerCustomer() {
         return "INSERT INTO customers (firstName, lastName, email, passwordHash, description, birthDate, phone, isCoach ) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
     },

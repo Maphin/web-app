@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { store } from '@/vuex/store'
 import Register from '../components/Register/Register.vue';
 import Login from '../components/Login/Login.vue';
 import Profile from '../components/Profile/Profile.vue';
@@ -14,18 +15,27 @@ import DashboardUpdateSubscription from '../components/Dashboard/Subscriptions/U
 import DashboardAddSubscription from '../components/Dashboard/Subscriptions/AddSubscription.vue';
 import { UserRoles } from "@/vuex/modules/AuthModule/authModule";
 
-// const checkoutGuard = (to, from, next) => {
-//     if (store.state.cart.length) {
-//         next();
-//     } else {
-//         next({name: 'cart'});
-//     }
-// }
+const checkoutGuard = (to, from, next) => {
+    if (Object.keys(store.state.cart.subscription).length !== 0) {
+        next();
+    } else {
+        next({name: 'home'});
+    }
+}
 
 const authGuard = (to, from, next) => {
     const isAuthorized = localStorage.hasOwnProperty('token');
     if (!isAuthorized) {
         next({ name: 'login' });
+    } else {
+        next();
+    }
+};
+
+const isAuthorized = (to, from, next) => {
+    const isAuthorized = localStorage.hasOwnProperty('token');
+    if (isAuthorized) {
+        next({ name: 'home' });
     } else {
         next();
     }
@@ -51,17 +61,20 @@ const routes = [
     {
         path: '/register',
         name: 'register',
-        component: Register
+        component: Register,
+        beforeEnter: isAuthorized
     },
     {
         path: '/login',
         name: 'login',
-        component: Login
+        component: Login,
+        beforeEnter: isAuthorized
     },
     {
         path: '/profile',
         name: 'profile',
-        component: Profile
+        component: Profile,
+        beforeEnter: authGuard
     },
     {
         path: '/tariff',
@@ -73,56 +86,50 @@ const routes = [
         name: 'checkout',
         component: Checkout,
         props: true,
-        beforeEnter: authGuard
+        beforeEnter: [authGuard, checkoutGuard]
     },
     {
         path: '/dashboard',
         name: 'dashboard',
         component: Dashboard,
-        //beforeEnter: managerAuthGuard
+        beforeEnter: managerAuthGuard
     },
     {
         path: '/dashboard/users',
         name: 'dashboardUsers',
         component: DashboardUsers,
-        //beforeEnter: managerAuthGuard
+        beforeEnter: managerAuthGuard
     },
     {
         path: '/dashboard/subscriptions',
         name: 'dashboardSubscriptions',
         component: DashboardSubscriptions,
-        //beforeEnter: managerAuthGuard
-    },
-    {
-        path: '/dashboard/subscriptions',
-        name: 'dashboardSubscriptions',
-        component: DashboardSubscriptions,
-        //beforeEnter: managerAuthGuard
+        beforeEnter: managerAuthGuard
     },
     {
         path: '/dashboard/orders',
         name: 'dashboardOrders',
         component: DashboardOrders,
-        //beforeEnter: managerAuthGuard
+        beforeEnter: managerAuthGuard
     },
     {
         path: '/dashboard/visits',
         name: 'dashboardVisits',
         component: DashboardVisits,
-        //beforeEnter: managerAuthGuard
+        beforeEnter: managerAuthGuard
     },
     {
         path: '/dashboard/updateSubscription/:id',
         name: 'dashboardUpdateSubscription',
         component: DashboardUpdateSubscription,
-        //beforeEnter: managerAuthGuard,
+        beforeEnter: managerAuthGuard,
         props: true,
     },
     {
         path: '/dashboard/addSubscription',
         name: 'dashboardAddSubscription',
         component: DashboardAddSubscription,
-        //beforeEnter: managerAuthGuard,
+        beforeEnter: managerAuthGuard,
     },
 ];
 

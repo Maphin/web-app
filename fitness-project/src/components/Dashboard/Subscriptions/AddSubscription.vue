@@ -3,7 +3,7 @@
     <div class="wrapper">
         <form @submit.prevent="onSubmit"
             class="custom-form">
-            <h2 class="form-title">Edit Subscription</h2>
+            <h2 class="form-title">Add Subscription</h2>
             <div class="form-group">
                 <label class="form-label" for="title">
                     Title
@@ -85,6 +85,11 @@
                 }
             }
         },
+        computed: {
+            errorFlag() {
+                return hasErrors(this.errors);
+            },
+        },
         methods: {
             ...mapActions('subscriptions',[
                 'CREATE_SUBSCRIPTION'
@@ -92,21 +97,21 @@
             clearErrors(fieldName) {
                 this.errors[fieldName] = '';
             },
-            errorFlag() {
-                return hasErrors(this.errors);
-            },
             async onSubmit() {
                 try {
                     if (!this.price) {
                         this.errors.price = 'Enter the price!';
                         return;
                     };
+
                     let subType = '';
+
                     if (this.type === 'Months') {
                         subType = 0;
                     } else {
                         subType = 1;
                     }
+
                     const data = {title: this.title, description: this.description, type: subType, period: this.period, price: this.price};
 
                     const res = await this.CREATE_SUBSCRIPTION(data);
@@ -115,7 +120,8 @@
                         this.$router.push({name: 'dashboardSubscriptions'});
                     }
                 } catch (err) {
-                    console.log(err.response.data.message);
+                    //console.log(err.response.data[0].msg);
+                    console.log(err);
                 }
             },
             chooseType(type) {

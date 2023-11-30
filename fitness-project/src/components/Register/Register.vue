@@ -121,6 +121,11 @@
                 },
             }
         },
+        computed: {
+            errorFlag() {
+                return hasErrors(this.errors);
+            },
+        },
         methods: {
             ...mapActions('auth',[
                 'onRegister'
@@ -128,12 +133,9 @@
             clearErrors(fieldName) {
                 this.errors[fieldName] = '';
             },
-            errorFlag() {
-                return hasErrors(this.errors);
-            },
             async onSubmit() {
                 try {
-                    if (!this.hasErrors) {
+                    if (!this.errorFlag) {
                         const {gender, ...userData} = this.user;
                         const res = await this.onRegister(userData);
 

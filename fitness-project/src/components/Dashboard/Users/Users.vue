@@ -56,7 +56,7 @@
               <div>{{ user.lastName }}</div>
             </td>
             <td>
-              <div>{{ user.email }}</div>
+              <div>{{ truncatedText(user.email) }}</div>
             </td>
             <td>
               <div v-if="user.birthDate">{{ formatDate(user.birthDate) }}</div>
@@ -81,6 +81,7 @@
     import Header from '@/components/Home/Header/HeaderLogoOnly.vue';
     import Paginator from '@/components/common/Paginator/Paginator.vue';
     import { formatDate } from '@/components/common/FormatDate/formatDate';
+    import { truncateText } from '@/components/common/TruncateText/truncateText';
 
     export default defineComponent({
         name: 'DashboardUsers',
@@ -101,6 +102,9 @@
         methods: {
             formatDate(date) {
               return formatDate(date);
+            },
+            truncatedText(text) {
+              return truncateText(text);
             }
         }
     })
@@ -189,7 +193,7 @@
             line-height: 1rem;
             font-weight: 500;
             letter-spacing: 0.05em;
-            text-align: left;
+            text-align: center;
             color: #6B7280;
             text-transform: uppercase;
         }
@@ -206,6 +210,7 @@
             td {
                 padding: 1rem 1.5rem;
                 white-space: nowrap;
+                text-align: center;
 
                 &:hover {
                     background-color: #f0f0f0;
@@ -223,12 +228,12 @@
               margin: 2px;
             }
             &__role .coach {
-              background-color: #4CAF50; /* Green color for Coach */
-              color: #ffffff; /* White text for Coach */
+              background-color: #4CAF50;
+              color: #ffffff;
             }
             &__role .customer {
-              background-color: #3498db; /* Blue color for Customer */
-              color: #ffffff; /* White text for Customer */
+              background-color: #3498db;
+              color: #ffffff;
             }
             .fa {
               margin-left: 5px;

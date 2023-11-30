@@ -11,38 +11,43 @@
             <RouterLink class="btn-main" to="/tariff">All pricing</RouterLink>
         </div>
 
-        <div class="plan basic">
-            <h3>basic plan</h3>
-            <div class="price"><span>$</span>30<span>/mo</span></div>
-        <div class="list">
-            <p> <i class="fa fa-check"></i> personal training </p>
-            <p> <i class="fa fa-check"></i> cardio exercise </p>
-            <p> <i class="fa fa-check"></i> weight lifting </p>
-            <p> <i class="fa fa-check"></i> diet plans </p>
-            <p> <i class="fa fa-check"></i> overall results </p>
-        </div> 
-            <a href="#" class="btn-main">get started</a>
-        </div>
-
-        <div class="plan">
-            <h3>premium plan</h3>
-            <div class="price"><span>$</span>30<span>/mo</span></div>
-        <div class="list">
-            <p> <i class="fa fa-check"></i> personal training </p>
-            <p> <i class="fa fa-check"></i> cardio exercise </p>
-            <p> <i class="fa fa-check"></i> weight lifting </p>
-            <p> <i class="fa fa-check"></i> diet plans </p>
-            <p> <i class="fa fa-check"></i> overall results </p>
-        </div> 
-            <a href="#" class="btn-main">get started</a>
-        </div>
+        <PlanItem
+                v-for="(subscription, index) in SUBSCRIPTIONS"
+                :key="subscription.id"
+                :subscription="subscription"
+                :index="index"
+                @addToCart="addToCart" />
     </section>
 </template>
 
 <script>
     import { defineComponent } from 'vue';
+    import { mapGetters, mapActions } from 'vuex';
+    import PlanItem from '@/components/Tariff/PlanItem/PlanItem.vue';
+
     export default defineComponent({
-        name: 'PricingBlock'
+        name: 'PricingBlock',
+        components: { PlanItem },
+        computed: {
+            ...mapGetters('subscriptions',[
+                'SUBSCRIPTIONS'
+            ])
+        },
+        methods: {
+            ...mapActions('subscriptions',[
+                'GET_SUBSCRIPTIONS_FROM_API'
+            ]),
+            ...mapActions('cart',[
+                'ADD_TO_CART'
+            ]),
+            addToCart(subscription) {
+                this.ADD_TO_CART(subscription);
+                this.$router.push({name: 'checkout'});
+            },
+        },
+        async mounted() {
+            await this.GET_SUBSCRIPTIONS_FROM_API({ currentPage: 1, pageSize: 2 });
+        }
     })
 </script>
 
@@ -71,43 +76,6 @@
                 }
             }
         }
-        .plan{
-        text-align: center;
-        padding:2rem;
-        flex-wrap: wrap;
-        &.basic{
-            background:liner-gradient(130deg, transparent 90%);
-            background: #111;
-        }
-        h3{
-            font-size: 2.5rem;
-            margin:1rem 0;
-            color:#fff;
-        }
-        .price{
-            font-size: 5rem;
-            font-weight: bolder;
-            color:#ff0000;
-
-            span{
-                color:#fff;
-                font-size: 2rem;
-            }
-        }
-        .list{
-            padding:1rem 0;
-            p{
-                line-height: 2;
-                font-size: 1.4rem;
-                color: #aaa;
-                padding: 1rem 0;
-                i{
-                    padding-right: 1rem;
-                    color: #ff0000;
-                }
-            }
-        }
-    }
     }
 
 </style>

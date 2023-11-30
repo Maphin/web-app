@@ -50,7 +50,6 @@ export const authModule = {
 
     actions: {
         async onLogin({commit}, {email, password}) {
-            console.log(email, password);
             const res = await AuthAPI.login(email, password);
 
             if (res && res.status === 200 && res.data) {

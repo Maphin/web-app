@@ -94,7 +94,7 @@ userService.login = async function (body) {
 userService.getUserById = async function (userId) {
     try {
         let error = false;
-        const user = await poolQuery(dbQueries.findById(), ['customers', userId]);
+        const user = await poolQuery(dbQueries.getUserInfo(), [userId]);
         if (!user) {
             error = true;
             return { error };
