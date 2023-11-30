@@ -1,5 +1,5 @@
 <template>
-    <div style="background: #111;">
+    <div class="full-height">
         <Header />
         <div class="profile-page">
             <div class="image">
@@ -53,12 +53,20 @@
 
 <style lang="scss" scoped>
     @import '../../assets/styles/base/mixins';
+    .full-height {
+        background: url(https://www.imgonline.com.ua/result_img/imgonline-com-ua-Blur-uq8SLRpb5t4Ux3PU.jpg) center (center/cover) no-repeat;
+        min-height: 100vh;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
     .profile-page {
         display: flex;
         flex-direction: row;
         margin: 20rem auto; 
         padding: 2rem; 
-        background: #333;
+        background: #111;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -90,7 +98,7 @@
             margin-bottom: .5rem;
             span {
                 font-weight: 100;
-                color: #ffffffea;
+                color: #fff;
             }
         }
     }
