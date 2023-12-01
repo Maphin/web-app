@@ -25,29 +25,27 @@ subscriptionService.getOne = async function (subscriptionId) {
 
 subscriptionService.create = async function (body) {
     let error = false;
-    const doc = {
-        title: body.title,
-        description: body.description,
-        type: body.type,
-        period: body.period,
-        price: body.price,
-    }
 
-    const rows = await poolQuery(dbQueries.findSubscriptionByTitle(), [doc.title]);
+    const rows = await poolQuery(dbQueries.findSubscriptionByTitle(), [body.title]);
 
     if (rows && rows.length > 0) {
         error = true;
         return { error };
     }
     await poolQuery(dbQueries.createSubscription(), [
-        doc.title,
-        doc.description,
-        doc.type,
-        doc.period,
-        doc.price,
+        body.title,
+        body.description,
+        body.type,
+        body.period,
+        body.price,
     ])
+    const subscription = await poolQuery(dbQueries.findSubscriptionByTitle(), [body.title]);
 
-    return doc;
+    if (subscription && subscription.length) {
+        return subscription[0];
+    } else {
+        throw Error('Fail to create a subscription');
+    }
 };
 
 subscriptionService.delete = async function (subscriptionId) {

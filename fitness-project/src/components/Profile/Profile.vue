@@ -54,7 +54,7 @@
 <style lang="scss" scoped>
     @import '../../assets/styles/base/mixins';
     .full-height {
-        background: url(https://www.imgonline.com.ua/result_img/imgonline-com-ua-Blur-uq8SLRpb5t4Ux3PU.jpg) center (center/cover) no-repeat;
+        background: url('../../assets/img/background.jfif') center (center/cover) no-repeat;
         min-height: 100vh;
         width: 100%;
         position: absolute;

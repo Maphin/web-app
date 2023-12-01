@@ -15,7 +15,7 @@
                         id="search"
                         v-model="search"
                         class="search__input"
-                        placeholder="Search by Customer's Name">
+                        placeholder="Search by Customer's Name" />
             </div>
             <form class="date-filter-form" @submit.prevent="filterVisits">
             <div class="form-group">
@@ -68,7 +68,7 @@
       </table>
       <Paginator :paginatorName="'visits'"/>
     </div>
-  </template>
+</template>
 
 <script>
     import { defineComponent } from 'vue';
@@ -238,7 +238,7 @@
     }
     .date-filter-form {
         display: flex;
-        align-items: end;
+        align-items: flex-end;
         justify-content: space-between;
         padding: 10px;
         border: 1px solid #ddd;

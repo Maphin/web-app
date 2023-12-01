@@ -52,7 +52,7 @@
             </th>
           </tr>
         </thead>
-        <tbody class="table__body">
+        <tbody v-if="SUBSCRIPTIONS" class="table__body">
           <tr v-for="(subscription, index) in filteredSubscriptions" :key="subscription.id">
             <td>
               <div>{{ index + 1 }}</div>
@@ -113,6 +113,7 @@
                 'SUBSCRIPTIONS'
             ]),
             filteredSubscriptions() {
+                console.log(this.SUBSCRIPTIONS)
                 return this.SUBSCRIPTIONS.filter(subscription => subscription.title.toLowerCase().includes(this.search.toLowerCase()));
             },
         },
@@ -134,7 +135,7 @@
             truncatedText(text) {
                 return truncateText(text);
             },
-        },
+        }
     })
 </script>
 
