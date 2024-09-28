@@ -113,7 +113,6 @@
                 'SUBSCRIPTIONS'
             ]),
             filteredSubscriptions() {
-                console.log(this.SUBSCRIPTIONS)
                 return this.SUBSCRIPTIONS.filter(subscription => subscription.title.toLowerCase().includes(this.search.toLowerCase()));
             },
         },

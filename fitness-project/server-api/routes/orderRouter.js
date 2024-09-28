@@ -1,6 +1,6 @@
 import express from 'express';
 import OrderController from '../controllers/orderController.js';
-import { handleValidationErrors, checkAuth, checkIsCoach, subscriptionCreateValidation } from '../utils/index.js';
+import { handleValidationErrors, checkAuth, checkIsCoach } from '../utils/index.js';
 
 const router = express.Router();
 

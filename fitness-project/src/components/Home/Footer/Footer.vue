@@ -46,7 +46,7 @@
             </div>
         </div>
     </section>
-    <div class="footer__reputation">created by <span> @dmaphin & @natal1SH</span> | all rights reserved 2023 </div>
+    <div class="footer__reputation">created by <span> @dmaphin </span> | all rights reserved 2023 </div>
 </template>
 
 <script>

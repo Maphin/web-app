@@ -72,10 +72,10 @@
                     </div>
                     </div>
                 </div>
-                <div class="register__form__box">
+                <!-- <div class="register__form__box">
                     <input type="file" id="file"/>
                     <label class="file"></label>
-                </div>
+                </div> -->
                 <button type="submit" id="submit" class="btn__login">Submit</button>
                 <ErrorMessage :errors="errors"
                               :hasErrors = "errorFlag"
@@ -273,6 +273,7 @@
             }
             .gender {
                 column-gap: .5rem;
+                margin-bottom: 2rem;
                 input {
                     accent-color: #ff0000;
                 }

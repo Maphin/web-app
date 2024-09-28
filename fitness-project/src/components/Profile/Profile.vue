@@ -9,7 +9,7 @@
                 <h1><span>Full Name: </span> {{user.firstName + ' ' + user.lastName}}</h1>
                 <h1><span>Email: </span>{{user.email}}</h1>
                 <h1><span>Phone: </span>{{user.phone}}</h1>
-                <h1><span>Curent Subscription: </span>{{user.subscription_title}}</h1>
+                <h1><span>Curent Subscription: </span>{{user.subscription_title || "Oops, you don't have a subscription yet"}}</h1>
             </div>
             <div v-if="isFetching" class="flex justify-center items-center">
                 <img src="../../assets/img/preloader.gif" alt="Loading...">

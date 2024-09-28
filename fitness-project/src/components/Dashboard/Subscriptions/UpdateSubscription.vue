@@ -105,25 +105,27 @@
             },
             async onSubmit() {
                 try {
-                    if (!this.price) {
-                        this.errors.price = 'Enter the price';
-                        return;
-                    };
+                    if (!this.errorFlag) {
+                        if (!this.price) {
+                            this.errors.price = 'Enter the price';
+                            return;
+                        };
 
-                    let subType = '';
+                        let subType = '';
 
-                    if (this.type === 'Months') {
-                        subType = 0;
-                    } else {
-                        subType = 1;
-                    }
+                        if (this.type === 'Months') {
+                            subType = 0;
+                        } else {
+                            subType = 1;
+                        }
 
-                    const data = {id: this.id, title: this.title, description: this.description, type: subType, period: this.period, price: this.price};
+                        const data = {id: this.id, title: this.title, description: this.description, type: subType, period: this.period, price: this.price};
 
-                    const res = await this.UPDATE_SUBSCRIPTION(data);
+                        const res = await this.UPDATE_SUBSCRIPTION(data);
 
-                    if (res.data) {
-                        this.$router.push({name: 'dashboardSubscriptions'});
+                        if (res.data) {
+                            this.$router.push({name: 'dashboardSubscriptions'});
+                        }
                     }
                 } catch (err) {
                     console.log(err);

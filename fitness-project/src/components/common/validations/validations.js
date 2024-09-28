@@ -44,6 +44,9 @@ export const priceValidation = (price) => {
     if (price > 9999.99) {
         error = "Price cannot be bigger than 9999,99";
     }
+    if (price < 0) {
+        error = "Price cannot be less than 0";
+    }
     return error;
 };
 export const periodValidation = (period) => {

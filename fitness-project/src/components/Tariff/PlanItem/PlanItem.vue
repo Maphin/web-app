@@ -12,7 +12,7 @@
                 v-for="description in parseDescription" :key="description">
                 <p> <i class="fa fa-check"></i> {{ description }} </p>
             </div> 
-            <button v-if="!isCheckout" @click="addToCart" class="btn-main">get started</button>
+            <button v-if="!isCheckout" @click="addToCart" class="btn-main">Get Started</button>
         </div>
     </div>
 </template>

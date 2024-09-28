@@ -19,7 +19,7 @@
                         <!-- <a href="#" class="btn-main">get started</a> -->
                         <RouterLink :to="{name: 'tariff'}">
                             <button class="btn-main">
-                                get started
+                                Get Started
                             </button>
                         </RouterLink>
                     </div>
@@ -32,7 +32,7 @@
                         <h3>Make yourself stronger than your excuses.</h3>
                         <RouterLink :to="{name: 'tariff'}">
                             <button class="btn-main">
-                                get started
+                                Get Started
                             </button>
                         </RouterLink>
                     </div>
@@ -45,7 +45,7 @@
                         <h3>Make yourself stronger than your excuses.</h3>
                         <RouterLink :to="{name: 'tariff'}">
                             <button class="btn-main">
-                                get started
+                                Get Started
                             </button>
                         </RouterLink>
                     </div>
