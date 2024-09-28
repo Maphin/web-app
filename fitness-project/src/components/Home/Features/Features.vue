@@ -9,7 +9,7 @@
                 <div class="box__content">
                     <img src="../../../assets/icons/biceps.png" alt="icon1">
                     <h3>body building</h3>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, porro.</p>
+                    <p>Boost strength and endurance with our tailored fitness programs</p>
                     <a href="#" class="btn-main">read more</a>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                 <div class="box__content">
                     <img src="../../../assets/icons/woman.png" alt="icon2">
                     <h3>fitness</h3>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, porro.</p>
+                    <p>Sculpt your body and build muscle with expert routines</p>
                     <a href="#" class="btn-main">read more</a>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="box__content">
                     <img src="../../../assets/icons/weightlifting.png" alt="icon3">
                     <h3>powerlifting</h3>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, porro.</p>
+                    <p>Master powerlifting techniques and lift heavier with ease</p>
                     <a href="#" class="btn-main">read more</a>
                 </div>
             </div>
